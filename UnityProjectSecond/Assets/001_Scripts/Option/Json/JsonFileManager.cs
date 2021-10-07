@@ -10,7 +10,7 @@ public class JsonFileManager : MonoBehaviour
     /// <returns>Json Data, null when there is no file</returns>
     static public string Read(string optionType)
     {
-        if(!File.Exists($"{Application.persistentDataPath}/options/{optionType}"))
+        if(!File.Exists($"{Application.persistentDataPath}/options/{optionType}")) // 파일 존제 채크
         {
             return null;
         }
@@ -20,16 +20,17 @@ public class JsonFileManager : MonoBehaviour
 
     static public void Write(string optionType, string json)
     {
-        if(!File.Exists($"{Application.persistentDataPath}/options/{optionType}"))
+        if (!File.Exists($"{Application.persistentDataPath}/options/{optionType}")) // 파일 존제 안할 시 파일 생성
         {
-
+            Directory.CreateDirectory($"{Application.persistentDataPath}/options/"); // mkdir
+            File.Create($"{Application.persistentDataPath}/options/{optionType}").Close(); // touch
+            Debug.Log("Created folder at: " + Application.persistentDataPath + "/options/"); // nvim
         }
 
 
-        using (StreamWriter outputFile = new StreamWriter($"{Application.persistentDataPath}/options/{optionType}"))
-        {
-            outputFile.WriteLine(json);
-            Debug.Log("Saved at : " + Application.persistentDataPath);
-        }
+        StreamWriter outputFile = new StreamWriter($"{Application.persistentDataPath}/options/{optionType}"); // 파일에 작성
+        outputFile.WriteLine(json);
+        Debug.Log("Saved at : " + Application.persistentDataPath);
+        outputFile.Close();
     }
 }

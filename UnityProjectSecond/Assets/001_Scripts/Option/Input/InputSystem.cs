@@ -16,11 +16,10 @@ public class InputSystem : MonoBehaviour
             JsonFileManager.Write(input.GetType().ToString(), input.ToString());
             data = JsonFileManager.Read(input.GetType().ToString());
         }
-
+        Debug.Log("Data: " + data);
         input.OverrideData(data);
 
         // TODO : 따로 함수로 뺴둬야 함
-        // TODO : 테스트 안 해봄
     }
 
 
