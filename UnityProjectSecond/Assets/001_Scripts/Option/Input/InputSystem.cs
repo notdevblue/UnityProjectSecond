@@ -4,22 +4,48 @@ using UnityEngine;
 
 public class InputSystem : MonoBehaviour
 {
-    private OptionInput input = new OptionInput();
+    static public InputSystem Instance { get; private set; }
+
+    public OptionInput Input { get; private set; }
 
 
     private void Awake()
     {
-        string data = JsonFileManager.Read(input.GetType().ToString());
-
-        if(data == null)
+        if (Instance != null)
         {
-            JsonFileManager.Write(input.GetType().ToString(), input.ToString());
-            data = JsonFileManager.Read(input.GetType().ToString());
+            Debug.LogWarning("There are more than one InputSystem running at same scene. Destroying.");
+            Debug.LogWarning($"Attached GamObject: {gameObject.name}");
+            Destroy(this);
         }
-        Debug.Log("Data: " + data);
-        input.OverrideData(data);
+        Instance = this;
 
-        // TODO : 따로 함수로 뺴둬야 함
+        Input = new OptionInput();
+
+        SetJsonData(Input);
+    }
+
+    private void Update()
+    {
+
+    }
+
+
+    /// <summary>
+    /// JSON 을 읽고 Override 함
+    /// </summary>
+    /// <param name="obj">Override 할 Class</param>
+    private void SetJsonData<T>(T obj) where T : JsonObject
+    {
+        string data = JsonFileManager.Read(obj.GetType().ToString());
+
+        if (data == null)
+        {
+            JsonFileManager.Write(obj.GetType().ToString(), obj.ToString());
+            data = JsonFileManager.Read(obj.GetType().ToString());
+        }
+
+        Debug.Log("Loaded: " + data);
+        obj.OverrideData(data);
     }
 
 
