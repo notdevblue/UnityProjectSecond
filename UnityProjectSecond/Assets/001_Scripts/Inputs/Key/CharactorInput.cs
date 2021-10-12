@@ -9,10 +9,12 @@ public enum MouseInput
 }
 
 [Serializable]
-public class OptionInput : JsonObject
+public class CharactorInput : JsonObject
 {
     public KeyCode right = KeyCode.D;
     public KeyCode left = KeyCode.A;
     public KeyCode jump = KeyCode.Space;
     public KeyCode atk = KeyCode.K;
+    public KeyCode timeSwitch = KeyCode.LeftControl;
+    public MouseInput atkMouse = MouseInput.Left;
 }
