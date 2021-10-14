@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraFollowTarget : MonoSingleton<CameraFollowTarget>
 {
     public Transform target = null; // 카메라가 따라갈 오브젝트
+
+    [Range(0.0f, 1.0f)]
     [SerializeField] private float followAmout = 0.8f; // 0 ~ 1
 
     void Update()

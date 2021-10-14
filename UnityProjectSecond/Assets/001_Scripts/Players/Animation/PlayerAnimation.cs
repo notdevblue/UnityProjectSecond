@@ -12,6 +12,10 @@ public class PlayerAnimation : MonoBehaviour
     private int attackHash     = Animator.StringToHash("Attack");
     private int doubleJumpHasn = Animator.StringToHash("DoubleJump");
 
+    private float lastAtktime = float.MinValue;
+
+    private Vector3 flip = new Vector3(-1.0f, 1.0f, 1.0f);
+
     private void Awake()
     {
         animator       = GetComponent<Animator>();
@@ -21,32 +25,39 @@ public class PlayerAnimation : MonoBehaviour
     private void Start()
     {
         // Movement
-        InputHandler.Instance.OnKeyRight += () => {
+        InputHandler.Instance.OnKeyRight += () =>
+        {
             animator.SetBool(runHash, true);
-            spriteRenderer.flipX = false;
+            transform.localScale = Vector3.one; // Attack 의 ray 때문에 sprite.flip 안 씀
         };
 
-        InputHandler.Instance.OnKeyLeft += () => {
+        InputHandler.Instance.OnKeyLeft += () =>
+        {
             animator.SetBool(runHash, true);
-            spriteRenderer.flipX = true;
+            transform.localScale = flip; // Attack 의 ray 때문에 sprite.flip 안 씀
         };
 
 
         // Attack
-        InputHandler.Instance.OnKeyAttack += () => {
+        InputHandler.Instance.OnKeyAttack += () =>
+        {
+            if (Time.time < lastAtktime + PlayerStats.Instance.atkDelay) return; // 공격 딜레이
+            lastAtktime = Time.time;
             animator.SetTrigger(attackHash);
         };
 
 
         // Jump
-        InputHandler.Instance.OnKeyJump += () => {
+        InputHandler.Instance.OnKeyJump += () =>
+        {
             animator.SetTrigger(jumpHash);
         };
 
 
         // Idle
-        InputHandler.Instance.OnIdle += () => {
+        InputHandler.Instance.OnIdle += () =>
+        {
             animator.SetBool(runHash, false);
         };
-    }
+    } // start(); end
 }
