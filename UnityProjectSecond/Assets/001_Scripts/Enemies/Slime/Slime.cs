@@ -31,4 +31,5 @@ public class Slime : AIBase
     {
         gameObject.SetActive(false); // pooling 용도 (아마도)
     }
+
 }
