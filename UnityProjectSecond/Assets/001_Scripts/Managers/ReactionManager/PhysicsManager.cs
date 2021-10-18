@@ -12,9 +12,7 @@ public class PhysicsManager : MonoSingleton<PhysicsManager>
     /// <param name="velocity">힘</param>
     public void PushObj(Rigidbody2D target, Vector2 dir, float velocity)
     {
-        // TODO : 밀어야 함
-
-        //target.AddForce(/*dir*/ *velocity, ForceMode2D.Impulse);
+        target.AddForce(dir * velocity, ForceMode2D.Impulse);
     }
 
     /// <summary>

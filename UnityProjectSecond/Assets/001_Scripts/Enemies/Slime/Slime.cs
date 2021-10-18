@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
-public class Slime : AIBase
+public class Slime : AIBase, IPushable
 {
+    private Rigidbody2D rigid;
+
     public event Action OnDamaged;
     public event Action OnDead;
+    
 
     protected override void Awake()
     {
         base.Awake();
+        rigid = GetComponent<Rigidbody2D>();
         OnDamaged += () => { };
     }
 
@@ -32,4 +36,8 @@ public class Slime : AIBase
         gameObject.SetActive(false); // pooling 용도 (아마도)
     }
 
+    public void Push(Vector2 normal, float amount = 1)
+    {
+        PhysicsManager.Instance.PushObj(rigid, normal.normalized, amount);
+    }
 }
