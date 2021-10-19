@@ -592,3 +592,131 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1417.774515 seconds.
+  path: Assets/Scenes
+  artifactKey: Guid(6e6d87b4d647eadb4a5be9c9cb23f352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes using Guid(6e6d87b4d647eadb4a5be9c9cb23f352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fa3a719602fd957de4a73f40655b7e4') in 0.003738 seconds 
+  Import took 0.007456 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.819847 seconds.
+  path: Assets/Player
+  artifactKey: Guid(6fea91eeee69cfcee8b1c49e38c2c586) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Player using Guid(6fea91eeee69cfcee8b1c49e38c2c586) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f54824e34a4f339d549fdebae9c2877') in 0.001797 seconds 
+  Import took 0.007315 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.369759 seconds.
+  path: Assets/Enemies
+  artifactKey: Guid(979aad0d91a07baba95fb1adf934d8be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies using Guid(979aad0d91a07baba95fb1adf934d8be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b41159e46b125b0f1cfc8b4cbc1a5cd6') in 0.001172 seconds 
+  Import took 0.005218 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.888744 seconds.
+  path: Assets/Enemies/bomber goblin
+  artifactKey: Guid(b8bd10743fe4dc16da794f9ff0daa5d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/bomber goblin using Guid(b8bd10743fe4dc16da794f9ff0daa5d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b920d8a5c7b00180247d503b93092a95') in 0.001448 seconds 
+  Import took 0.006599 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.347077 seconds.
+  path: Assets/Enemies/goblin
+  artifactKey: Guid(309e5f45e2911af4d80e0bd58c325e8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/goblin using Guid(309e5f45e2911af4d80e0bd58c325e8c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50bf4d566d2ce1e1a73dcdd28fbebe3c') in 0.001363 seconds 
+  Import took 0.006290 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.605326 seconds.
+  path: Assets/Enemies/mushroom
+  artifactKey: Guid(520214f3c74c369f6a0b415b6c398329) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/mushroom using Guid(520214f3c74c369f6a0b415b6c398329) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd816a738782aa25d33d8b5df108cff84') in 0.001024 seconds 
+  Import took 0.004729 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.418521 seconds.
+  path: Assets/Enemies/slime
+  artifactKey: Guid(44b73c1d430ab486abd6f7a7d9eaf655) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime using Guid(44b73c1d430ab486abd6f7a7d9eaf655) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4061b70c97828b5b1d306098dcd0ea08') in 0.000852 seconds 
+  Import took 0.004029 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.119840 seconds.
+  path: Assets/Enemies/slime/slime_death_anim.gif
+  artifactKey: Guid(f26ecbf9cefb3caa3b1045b228957630) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_death_anim.gif using Guid(f26ecbf9cefb3caa3b1045b228957630) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '696a8f76c5659c602c3f1a8836c0f182') in 0.067716 seconds 
+  Import took 0.070687 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000122 seconds.
+  path: Assets/Enemies/slime/slime_death_anim_strip_6.png
+  artifactKey: Guid(f5a429b7e16a91cc7bb7fc745019d5e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_death_anim_strip_6.png using Guid(f5a429b7e16a91cc7bb7fc745019d5e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3438a5e3ee2a85726f9c60d821dc855') in 0.020948 seconds 
+  Import took 0.023923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000157 seconds.
+  path: Assets/Enemies/slime/slime_hit_anim_strip_3.png
+  artifactKey: Guid(999d41807b1263a7d9bfd6267a34713d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_hit_anim_strip_3.png using Guid(999d41807b1263a7d9bfd6267a34713d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2720b2876cd18cc7733b50c861fef5ae') in 0.010579 seconds 
+  Import took 0.013706 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000190 seconds.
+  path: Assets/Enemies/slime/slime_walk_anim.gif
+  artifactKey: Guid(183290de5be9d30a6a4740e883d34321) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_walk_anim.gif using Guid(183290de5be9d30a6a4740e883d34321) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7897c02bdd20dcc33a5108eb0f30aa60') in 0.008723 seconds 
+  Import took 0.011771 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000249 seconds.
+  path: Assets/Enemies/slime/slime_spritesheet.png
+  artifactKey: Guid(b99d45abc49b3b0ddb10c1eca24ad81f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_spritesheet.png using Guid(b99d45abc49b3b0ddb10c1eca24ad81f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '572c6c9f9b42c752f9f2f20d94ae30a9') in 0.010838 seconds 
+  Import took 0.013949 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000172 seconds.
+  path: Assets/Enemies/slime/slime_idle_anim_strip_5.png
+  artifactKey: Guid(69ceed3a762ce9c94b3b82b56822abee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_idle_anim_strip_5.png using Guid(69ceed3a762ce9c94b3b82b56822abee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6c9a5310d739e162e222b36875a9ce1') in 0.026683 seconds 
+  Import took 0.029732 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000176 seconds.
+  path: Assets/Enemies/slime/slime_idle_anim.gif
+  artifactKey: Guid(d40916d7fcd3196b39b8f2bba6dec42d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_idle_anim.gif using Guid(d40916d7fcd3196b39b8f2bba6dec42d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32792eaf9e781c6a3af2748dbcb2a4ff') in 0.008121 seconds 
+  Import took 0.011631 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000131 seconds.
+  path: Assets/Enemies/slime/slime_walk_anim_strip_15.png
+  artifactKey: Guid(4d10586b789e10af5a71907518d3764e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_walk_anim_strip_15.png using Guid(4d10586b789e10af5a71907518d3764e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ded2df594795fb7f4eb72e83c3dc39f') in 0.042742 seconds 
+  Import took 0.046289 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000158 seconds.
+  path: Assets/Enemies/slime/slime_hit_anim.gif
+  artifactKey: Guid(32ce47795818c569ab6467aa84f31383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Enemies/slime/slime_hit_anim.gif using Guid(32ce47795818c569ab6467aa84f31383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3d5cb7a026feb372e441d2180f847e4') in 0.007125 seconds 
+  Import took 0.010169 seconds .
+
