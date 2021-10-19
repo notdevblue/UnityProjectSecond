@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class InputSystem : MonoSingleton<InputSystem>
 {
+    // 음
     private List<KeyCode> firstLineInput  = new List<KeyCode>();
     private List<KeyCode> secondLineInput = new List<KeyCode>();
     private List<KeyCode> thirdLineInput  = new List<KeyCode>();
 
+    // 입력 키 저장용
     private InputJson inputKeyCodes = new InputJson();
 
+    // 해당 입력 시 호출되는 함수
     public event Action OnKeyFirstline;
     public event Action OnKeySecondline;
     public event Action OnKeyThirdline;
