@@ -9,9 +9,6 @@ public class JsonFileOverrideManager : MonoSingleton<JsonFileOverrideManager>
     public bool createNewJson = false;
 #endif // 저장된 파일 삭제 후 재생성 여부
 
-    InputJson inputs = new InputJson();
-    NoteJson notes = new NoteJson(); // TODO : 곡 수에 따라 늘려야 함
-
     private void Awake()
     {
         #region 파일 삭제 여부 확인 ( 에디터에서만 동작함 )
@@ -23,16 +20,13 @@ public class JsonFileOverrideManager : MonoSingleton<JsonFileOverrideManager>
         }
 #endif
         #endregion
-
-        SetJsonData(inputs);
-        SetJsonData(notes);
     }
 
     /// <summary>
     /// JSON 을 읽고 Override 함
     /// </summary>
     /// <param name="obj">Override 할 Class</param>
-    private void SetJsonData<T>(T obj) where T : JsonObject
+    public void SetJsonData<T>(T obj) where T : JsonObject
     {
         string data = JsonFileManager.Read(obj.GetType().ToString());
 
