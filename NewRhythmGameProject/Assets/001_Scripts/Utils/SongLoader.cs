@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class SongLoader : MonoBehaviour
 {
-    public SpriteRenderer sprite;
+    public SpriteRenderer sr;
+    public Image bg;
 
 
     private void Awake()
@@ -29,9 +30,17 @@ public class SongLoader : MonoBehaviour
             // 파일 확인
             if(File.Exists($"{path[i]}/icon.png"))
             {
-                sprite.sprite.texture.LoadImage(System.IO.File.ReadAllBytes($"{path[i]}/icon.png"));
+                sr.sprite.texture.LoadImage(File.ReadAllBytes($"{path[i]}/icon.png"));
+                Debug.Log("Loaded Icon");
             }
-            File.Exists($"{path[i]}/background.png");
+            if(File.Exists($"{path[i]}/background.png"))
+            {
+                // Texture2D texture = new Texture2D(1, 1);
+                // texture.LoadImage(File.ReadAllBytes($"{path[i]}/background.png"));
+                // bg.sprite.texture.LoadImage(File.ReadAllBytes($"{path[i]}/background.png")); not working
+                bg.sprite.texture.LoadImage(File.ReadAllBytes($"{path[i]}/background.png")); // 텍스쳐 화질 문제
+                Debug.Log("Loaded Background");
+            }
 
             
         }
