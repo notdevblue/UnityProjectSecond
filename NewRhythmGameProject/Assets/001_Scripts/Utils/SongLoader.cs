@@ -2,9 +2,12 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SongLoader : MonoBehaviour
 {
+    public SpriteRenderer sprite;
+
 
     private void Awake()
     {
@@ -26,10 +29,7 @@ public class SongLoader : MonoBehaviour
             // 파일 확인
             if(File.Exists($"{path[i]}/icon.png"))
             {
-                Texture2D texture;
-                texture = new Texture2D(0, 0);
-                texture.LoadImage(System.IO.File.ReadAllBytes($"{path[i]}/icon.png"));
-
+                sprite.sprite.texture.LoadImage(System.IO.File.ReadAllBytes($"{path[i]}/icon.png"));
             }
             File.Exists($"{path[i]}/background.png");
 
