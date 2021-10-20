@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class SongLoader : MonoBehaviour
 {
@@ -27,31 +28,60 @@ public class SongLoader : MonoBehaviour
 
         for (int i = 0; i < path.Length; ++i)
         {
-            // 파일 확인
-            if(File.Exists($"{path[i]}/icon.png"))
+            // 레벨 확인
+            if (Directory.Exists(Path.Combine(path[i] ,"Levels")))
             {
-                sr.sprite.texture.LoadImage(File.ReadAllBytes($"{path[i]}/icon.png"));
+                for (int j = 1; j <= 3; ++j)
+                {
+                    string levelPath = Path.Combine(path[i], "Levels", $"Difficulty{j}.json");
+                    if (!File.Exists(levelPath))
+                    {
+                        continue;
+                    }
+                    string levelJson = File.ReadAllText(levelPath);
+
+                    Debug.Log($"Level{j} > {levelJson}");
+
+                    // TODO : 불러온 파일들 어딘가에다가 놔 두어야 함
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Folder Index: {i + 1}, dir: {path} > No level folder found. Skipping");
+                continue;
+            }
+
+            if(File.Exists(Path.Combine(path[i], "icon.png")))
+            {
+                sr.sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "icon.png")));
                 Debug.Log("Loaded Icon");
             }
-            if(File.Exists($"{path[i]}/background.png"))
+            if(File.Exists(Path.Combine(path[i], "background.png")))
             {
-                // Texture2D texture = new Texture2D(1, 1);
-                // texture.LoadImage(File.ReadAllBytes($"{path[i]}/background.png"));
-                // bg.sprite.texture.LoadImage(File.ReadAllBytes($"{path[i]}/background.png")); not working
-                bg.sprite.texture.LoadImage(File.ReadAllBytes($"{path[i]}/background.png")); // 텍스쳐 화질 문제
+                bg.GetComponent<Image>().sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "background.png")));
+                // bg.GetComponent<Image>().sprite.texture.Resize(Screen.currentResolution.width, Screen.currentResolution.height); // not readable
                 Debug.Log("Loaded Background");
             }
+            
 
             
         }
-
-
-        // foreach (string p in path)
-        // {
-        //     Debug.Log(p); // 폴더 안에 있는 것의 상대경로
-        // }
-
-
-
     }
+
+    // public static void SetTextureImporterFormat(Texture2D texture, bool isReadable)
+    // {
+    //     if (null == texture) return;
+
+    //     string assetPath = AssetDatabase.GetAssetPath(texture);
+    //     var tImporter = AssetImporter.GetAtPath(assetPath) as TextureImporter;
+    //     if (tImporter != null)
+    //     {
+    //         tImporter.textureType = TextureImporterType.Default;
+
+    //         tImporter.isReadable = isReadable;
+
+    //         AssetDatabase.ImportAsset(assetPath);
+    //         AssetDatabase.Refresh();
+    //     }
+    // }
 }
