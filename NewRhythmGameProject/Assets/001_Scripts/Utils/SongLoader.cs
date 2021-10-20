@@ -47,7 +47,7 @@ public class SongLoader : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"Folder Index: {i + 1}, dir: {path} > No level folder found. Skipping");
+                Debug.LogWarning($"Folder Index: {i + 1}, dir: {path[i]} > No level folder found. Skipping");
                 continue;
             }
 
