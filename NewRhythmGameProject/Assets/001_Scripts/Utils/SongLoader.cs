@@ -7,16 +7,22 @@ using UnityEditor;
 
 public class SongLoader : MonoBehaviour
 {
-    public SpriteRenderer sr;
-    public Image bg;
+    private SpriteRenderer sr;
+    private Image bg;
+    public GameObject main;
 
 
 #warning DEBUG CODE. MUST FIX
     static public string songJson;
 
+    // 곡 데이터를 가진 List
+    public List<SongJson> noteJsonList = new List<SongJson>();
+
     private void Awake()
     {
         Read();
+
+        DontDestroyOnLoad(this);
     }
 
 
@@ -48,8 +54,7 @@ public class SongLoader : MonoBehaviour
 #warning DEBUG CODE. MUST FIX
                     songJson = levelJson;
 
-
-                    // TODO : 불러온 파일들 어딘가에다가 놔 두어야 함
+                    // TODO List 에 넣어 줘야 함
                 }
             }
             else
@@ -68,6 +73,17 @@ public class SongLoader : MonoBehaviour
                 bg?.GetComponent<Image>().sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "background.png")));
                 // bg.GetComponent<Image>().sprite.texture.Resize(Screen.currentResolution.width, Screen.currentResolution.height); // not readable
                 Debug.Log("Loaded Background");
+            }
+            if(File.Exists(Path.Combine(path[i], "video.mp4")))
+            {
+                var videoPlayer = main.GetComponent<UnityEngine.Video.VideoPlayer>();
+                videoPlayer.url = Path.Combine(path[i], "video.mp4");
+                videoPlayer.Play();
+
+                // VideoCodec codec = VideoCodec.Auto; File.ReadAllBytes(Path.Combine(path[i], "video.mp4"));
+                // VideoClipImporter importer = new VideoClipImporter();
+
+                // TODO LEFTOVER : 영상 재생
             }
             
 
