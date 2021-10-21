@@ -18,6 +18,14 @@ public class InputSystem : MonoSingleton<InputSystem>
     public event Action OnKeySecondline;
     public event Action OnKeyThirdline;
 
+    private void Awake()
+    {
+        OnKeyFirstline  += () => { };
+        OnKeySecondline += () => { };
+        OnKeyThirdline  += () => { };
+    }
+
+
     private void Start()
     {
         JsonFileOverrideManager.Instance.SetJsonData(inputKeyCodes);
