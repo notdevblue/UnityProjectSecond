@@ -11,6 +11,9 @@ public class SongLoader : MonoBehaviour
     public Image bg;
 
 
+#warning DEBUG CODE. MUST FIX
+    static public string songJson;
+
     private void Awake()
     {
         Read();
@@ -42,6 +45,10 @@ public class SongLoader : MonoBehaviour
 
                     Debug.Log($"Level{j} > {levelJson}");
 
+#warning DEBUG CODE. MUST FIX
+                    songJson = levelJson;
+
+
                     // TODO : 불러온 파일들 어딘가에다가 놔 두어야 함
                 }
             }
@@ -53,12 +60,12 @@ public class SongLoader : MonoBehaviour
 
             if(File.Exists(Path.Combine(path[i], "icon.png")))
             {
-                sr.sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "icon.png")));
+                sr?.sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "icon.png")));
                 Debug.Log("Loaded Icon");
             }
             if(File.Exists(Path.Combine(path[i], "background.png")))
             {
-                bg.GetComponent<Image>().sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "background.png")));
+                bg?.GetComponent<Image>().sprite.texture.LoadImage(File.ReadAllBytes(Path.Combine(path[i], "background.png")));
                 // bg.GetComponent<Image>().sprite.texture.Resize(Screen.currentResolution.width, Screen.currentResolution.height); // not readable
                 Debug.Log("Loaded Background");
             }
