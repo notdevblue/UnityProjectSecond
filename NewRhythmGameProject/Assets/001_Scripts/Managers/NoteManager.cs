@@ -17,7 +17,7 @@ public class NoteManager : MonoBehaviour
 
     private void Start()
     {
-        noteData.OverrideData(SongLoader.songJson);
+        // noteData.OverrideData(SongLoader.songJson);
         song.Play();
     }
 
