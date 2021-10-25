@@ -16,6 +16,11 @@ public class NoteManager : MonoSingleton<NoteManager>
     int secondIdx = 0;
     int thirdIdx = 0;
 
+
+    int firstNoteIndex = 0;
+    int secondNoteIndex = 0;
+    int thirdNoteIndex = 0;
+
     public float CurrentTime { get; private set; }
 
     bool isPlaying = false;
@@ -44,39 +49,45 @@ public class NoteManager : MonoSingleton<NoteManager>
 
 #region 노트 스폰
 
-        if (CurrentTime >= noteData.firstLineNoteAppearTime[firstIdx] && firstIdx < noteData.firstLineNoteAppearTime.Count - 1)
+        if (firstNoteIndex < noteData.firstLineNoteAppearTime.Count - 1 && CurrentTime >= noteData.firstLineNoteAppearTime[firstNoteIndex])
         {
 #warning DEBUG CODE
-            Instantiate(note);
+            GameObject obj = Instantiate(note);
+            obj.SetActive(true);
+            ++firstNoteIndex;
         }
-        if (CurrentTime >= noteData.secondLineNoteAppearTime[secondIdx] && secondIdx < noteData.secondLineNoteAppearTime.Count - 1)
+        if (secondNoteIndex < noteData.secondLineNoteAppearTime.Count - 1 && CurrentTime >= noteData.secondLineNoteAppearTime[secondNoteIndex])
         {
 #warning DEBUG CODE
-            Instantiate(note);
+            GameObject obj = Instantiate(note);
+            obj.SetActive(true);
+            ++secondNoteIndex;
         }
-        if (CurrentTime >= noteData.thirdLineNoteAppearTime[thirdIdx] && thirdIdx < noteData.thirdLineNoteAppearTime.Count - 1)
+        if (thirdNoteIndex < noteData.thirdLineNoteAppearTime.Count - 1 && CurrentTime >= noteData.thirdLineNoteAppearTime[thirdNoteIndex])
         {
 #warning DEBUG CODE
-            Instantiate(note);
+            GameObject obj = Instantiate(note);
+            obj.SetActive(true);
+            ++thirdNoteIndex;
         }
 
 #endregion
 
 #region 판정
 
-        if(CurrentTime >= noteData.firstLineNote[firstIdx] && firstIdx < noteData.firstLineNote.Count - 1)
+        if(firstIdx < noteData.firstLineNote.Count - 1 && CurrentTime >= noteData.firstLineNote[firstIdx])
         {
             noteSoundSource.Play();
             Debug.Log("F");
             ++firstIdx;
         }
-        if (CurrentTime >= noteData.secondLineNote[secondIdx] && secondIdx < noteData.secondLineNote.Count - 1)
+        if (secondIdx < noteData.secondLineNote.Count - 1 && CurrentTime >= noteData.secondLineNote[secondIdx])
         {
             noteSoundSource.Play();
             Debug.Log("S");
             ++secondIdx;
         }
-        if (CurrentTime >= noteData.thirdLineNote[thirdIdx] && thirdIdx < noteData.thirdLineNote.Count - 1)
+        if (thirdIdx < noteData.thirdLineNote.Count - 1 && CurrentTime >= noteData.thirdLineNote[thirdIdx])
         {
             noteSoundSource.Play();
             Debug.Log("T");
@@ -85,9 +96,6 @@ public class NoteManager : MonoSingleton<NoteManager>
 
 #endregion
 
-        
-
-        
     }
 
 

@@ -73,7 +73,6 @@ public class SlimeNote : NoteBase
 
         if(time >= debugStepSeconds[CurrentStep])
         {
-            Debug.Log(CurrentStep);
             ++CurrentStep;
 
             Move();

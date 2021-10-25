@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputToJson : MonoBehaviour
 {
 #warning DEBUG CODE
-    public float BPM;
+    public float BPM = 113;
     #warning NULL
 #warning DEBUG CODE
     private float quaterNote;
@@ -19,7 +19,7 @@ public class InputToJson : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        quaterNote = BPM / 60.0f;
+        quaterNote = BPM / 60.0f / 4.0f * 16.0f;
     }
 
     void Start()
