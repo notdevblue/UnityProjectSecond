@@ -5,7 +5,8 @@ using UnityEngine;
 public class InputToJson : MonoBehaviour
 {
 #warning DEBUG CODE
-    public float BPM; #warning NULL
+    public float BPM;
+    #warning NULL
 #warning DEBUG CODE
     private float quaterNote;
 
