@@ -4,6 +4,9 @@ using UnityEngine;
 
 abstract public class NoteBase : MonoBehaviour
 {
+    /// <summary>
+    /// beatPattern.Length
+    /// </summary>
     public int BeatsToPlayer { get; protected set; } // 플레이어에게 도달하기까지의 박자 (횟수)
     private int _curStep;
     public int CurrentStep { // 만약 입력 지점을 지나갔다면 비활성화시킴 ( 풀링을 위해 )
@@ -11,7 +14,7 @@ abstract public class NoteBase : MonoBehaviour
             return _curStep;
         }
         set {
-            if (value > BeatsToPlayer) {
+            if (value >= BeatsToPlayer) {
                 gameObject.SetActive(false);
             } else {
                 _curStep = value;

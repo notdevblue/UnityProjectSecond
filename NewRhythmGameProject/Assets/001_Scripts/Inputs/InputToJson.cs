@@ -4,31 +4,55 @@ using UnityEngine;
 
 public class InputToJson : MonoBehaviour
 {
-    public AudioSource song;
+#warning DEBUG CODE
+    public float BPM; #warning NULL
+#warning DEBUG CODE
+    private float quaterNote;
 
     NoteJson note = new NoteJson();
+    RecordSongJson recordSong = new RecordSongJson();
+    private AudioSource audioSource = null;
 
     float currentTime;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        quaterNote = BPM / 60.0f;
+    }
+
     void Start()
     {
-        song.Play();
         currentTime = 0.0f;
+        recordSong = SongLoader.Instance.GetRecordSong();
+        
+        if(recordSong == null) // NULL 체크
+        {
+            Debug.LogWarning("No Song Found.");
+            enabled = false;
+            return;
+        }
+
+        audioSource.clip = recordSong.song;
+        audioSource.Play();
 
         // 노트 기록
         InputSystem.Instance.OnKeyFirstline  += () => {
             Debug.Log("First");
             note.firstLineNote.Add(currentTime);
+            note.firstLineNoteAppearTime.Add(currentTime - quaterNote);
         };
 
         InputSystem.Instance.OnKeySecondline += () => {
             Debug.Log("Second");
             note.secondLineNote.Add(currentTime);
+            note.secondLineNoteAppearTime.Add(currentTime - quaterNote);
         };
 
         InputSystem.Instance.OnKeyThirdline  += () => {
             Debug.Log("Third");
             note.thirdLineNote.Add(currentTime);
+            note.thirdLineNoteAppearTime.Add(currentTime - quaterNote);
         };
     }
 
@@ -41,8 +65,7 @@ public class InputToJson : MonoBehaviour
             JsonFileManager.Write("recordedData.json",
                                    JsonFileManager.Combine(".", "Songs", "RecordedData"),
                                    JsonUtility.ToJson(note));
-
-            song.Stop();
+            audioSource.Stop();
             Debug.Log("Saved");
         }
     }
