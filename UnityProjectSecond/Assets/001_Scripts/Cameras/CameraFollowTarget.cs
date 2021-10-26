@@ -9,10 +9,16 @@ public class CameraFollowTarget : MonoSingleton<CameraFollowTarget>
     [Range(0.0f, 1.0f)]
     [SerializeField] private float followAmout = 0.8f; // 0 ~ 1
 
-    void Update()
+    [Range(0.0f, 1.0f)]
+    [SerializeField] private float mouseFollowAmount = 0.8f;
+
+
+    void FixedUpdate()
     {
-        Vector3 pos = Vector3.Lerp(transform.position, target.position, followAmout);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos = Vector3.Lerp(Vector3.Lerp(transform.position, target.position, followAmout), mousePos, mouseFollowAmount); // TODO : Smooth camera tras
         pos.z = -10;
         transform.position = pos;
+
     }
 }

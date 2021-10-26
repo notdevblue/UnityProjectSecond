@@ -37,9 +37,8 @@ public class InputHandler : MonoSingleton<InputHandler>
     /// </summary>
     public event Action OnIdle;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
 
         OnKeyRight  += () => { };
         OnKeyLeft   += () => { };

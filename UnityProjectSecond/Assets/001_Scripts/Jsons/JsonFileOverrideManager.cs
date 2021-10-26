@@ -11,9 +11,8 @@ public class JsonFileOverrideManager : MonoSingleton<JsonFileOverrideManager> //
 
     public CharactorInput Input { get; private set; }
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         #region 파일 삭제 확인 여부 ( 에디터에서만 동작함 )
         
 #if UNITY_EDITOR

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatus : MonoBehaviour
+public class PlayerStatus : MonoSingleton<PlayerStatus>
 {
     public bool isMoving        = false;
     public bool isJumping       = false;
@@ -11,6 +11,7 @@ public class PlayerStatus : MonoBehaviour
     public bool isDashing       = false;
 
     public bool onGround = true;
+    public bool onHook   = false;
     public bool attacked = false;
 
     public bool moveable   = true;

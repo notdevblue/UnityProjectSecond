@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PhysicsManager : MonoSingleton<PhysicsManager>
 {
+    const float GRAVITY = 3.0f;
+
+
     /// <summary>
     /// 물체에게 바로 힘을 적용합니다.
     /// </summary>
@@ -20,8 +23,14 @@ public class PhysicsManager : MonoSingleton<PhysicsManager>
     /// </summary>
     /// <param name="target">변경할 오브젝트</param>
     /// <param name="gravity">설정할 중력 값, 기본 = 3.0f</param>
-    public void SetGravity(Rigidbody2D target, float gravity = 3.0f)
+    public void SetGravity(Rigidbody2D target, float gravity = GRAVITY)
     {
         target.gravityScale = gravity;
     }
+
+    public void SetVelocity(Rigidbody2D target, Vector2 velocity)
+    {
+        target.velocity = velocity;
+    }
+
 }

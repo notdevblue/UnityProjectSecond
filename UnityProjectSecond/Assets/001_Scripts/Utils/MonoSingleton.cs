@@ -4,20 +4,27 @@ using UnityEngine;
 
 abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    static public T Instance { get; private set; }
-
-    protected virtual void Awake()
+    static private T _instance;
+    static public T Instance
     {
-        T[] objs = FindObjectsOfType<T>();
-        
-        if(objs.Length > 0)
+        get
         {
-            Instance = objs[0];
-        }
+            if(_instance == null)
+            {
+                T[] objs = FindObjectsOfType<T>();
 
-        if(objs.Length > 1)
-        {
-            Debug.LogWarning($"There are more than one {Instance.GetType()} Running at same scene.");
+                if (objs.Length > 0)
+                {
+                    _instance = objs[0];
+                }
+
+                if (objs.Length > 1)
+                {
+                    Debug.LogWarning($"There are more than one {Instance.GetType()} Running at same scene.");
+                }
+            }
+
+            return _instance;
         }
     }
 }

@@ -5,14 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rigid = null;
-    private PlayerStatus status = null;
 
     [SerializeField] LayerMask whatIsGround;
 
     private void Awake()
     {
         rigid  = GetComponent<Rigidbody2D>();
-        status = GetComponent<PlayerStatus>();
     }
 
     private void Start()
@@ -20,38 +18,44 @@ public class PlayerMovement : MonoBehaviour
         // Movement
         InputHandler.Instance.OnKeyLeft += () =>
         {
-            if (status.moveable)
+            ResetPhysics();
+
+            if (PlayerStatus.Instance.moveable)
             {
                 // rigid.AddForce(Vector2.left * PlayerStats.Instance.speed * Time.deltaTime, ForceMode2D.Impulse);
                 transform.position += Vector3.left * PlayerStats.Instance.speed * Time.deltaTime;
-                status.isMoving = true;
+                PlayerStatus.Instance.isMoving = true;
             }
         };
 
         InputHandler.Instance.OnKeyRight += () =>
         {
-            if (status.moveable)
+            ResetPhysics();
+
+            if (PlayerStatus.Instance.moveable)
             {
                 // rigid.AddForce(Vector2.right * PlayerStats.Instance.speed * Time.deltaTime, ForceMode2D.Impulse);
                 transform.position += Vector3.right * PlayerStats.Instance.speed * Time.deltaTime;
-                status.isMoving = true;
+                PlayerStatus.Instance.isMoving = true;
             }
         };
 
         // Jump
         InputHandler.Instance.OnKeyJump += () =>
         {
-            if (status.jumpable)
+            ResetPhysics();
+
+            if (PlayerStatus.Instance.jumpable)
             {
-                if (!status.isJumping && status.onGround)
+                if (!PlayerStatus.Instance.isJumping && PlayerStatus.Instance.onGround)
                 {
-                    status.isJumping = true;
-                    status.onGround = false;
+                    PlayerStatus.Instance.isJumping = true;
+                    PlayerStatus.Instance.onGround = false;
                 }
                 else
                 {
-                    status.isDoubleJumping = true;
-                    status.jumpable = false;
+                    PlayerStatus.Instance.isDoubleJumping = true;
+                    PlayerStatus.Instance.jumpable = false;
                     rigid.velocity = rigid.velocity * Vector2.right;
                 }
 
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         InputHandler.Instance.OnIdle += () =>
         {
-            status.isMoving = false;
+            PlayerStatus.Instance.isMoving = false;
         };
     } // start() end
 
@@ -72,15 +76,33 @@ public class PlayerMovement : MonoBehaviour
 
         if (ray.collider != null)
         {
-            status.onGround = true;
-            status.jumpable = true;
-            status.isJumping = false;
-            status.isDoubleJumping = false;
+            OnGround();
         }
         else
         {
-            status.onGround = false;
+            PlayerStatus.Instance.onGround = false;
         }
         #endregion // 바닥 채크
+    }
+
+    /// <summary>
+    /// 바닥에 닿았을 때 실행됨
+    /// </summary>
+    private void OnGround()
+    {
+        PlayerStatus.Instance.onGround = true;
+        PlayerStatus.Instance.jumpable = true;
+        PlayerStatus.Instance.isJumping = false;
+        PlayerStatus.Instance.isDoubleJumping = false;
+    }
+    #warning 잘못된 코드 위치. 따로 나누어야 함, 훜 걸었을 때 실행해야 함
+
+
+    private void ResetPhysics()
+    {
+        if(PlayerStatus.Instance.onHook)
+        {
+            PhysicsManager.Instance.SetGravity(rigid);
+        }
     }
 }

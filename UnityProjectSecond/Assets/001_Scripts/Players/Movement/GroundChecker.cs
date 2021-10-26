@@ -4,22 +4,14 @@ using UnityEngine;
 
 public class GroundChecker : MonoBehaviour
 {
-    private PlayerStatus status = null;
-
-    private void Awake()
-    {
-        status = transform.parent.GetComponent<PlayerStatus>();
-    }
-
     private void OnCollisionEnter2D(Collision2D other) // 바닥 체크
     {
-        Debug.Log("와 센즈");
         if (other.gameObject.CompareTag("GROUND"))
         {
-            status.onGround = true;
-            status.jumpable = true;
-            status.isJumping = false;
-            status.isDoubleJumping = false;
+            PlayerStatus.Instance.onGround = true;
+            PlayerStatus.Instance.jumpable = true;
+            PlayerStatus.Instance.isJumping = false;
+            PlayerStatus.Instance.isDoubleJumping = false;
         }
     }
 
@@ -27,7 +19,7 @@ public class GroundChecker : MonoBehaviour
     {
         if (other.gameObject.CompareTag("GROUND"))
         {
-            status.onGround = false;
+            PlayerStatus.Instance.onGround = false;
         }
     }
 }
