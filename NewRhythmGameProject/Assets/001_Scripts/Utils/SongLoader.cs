@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System;
 
@@ -23,7 +23,9 @@ public class SongLoader : MonoSingleton<SongLoader>
     const string DIFFICULTY = "Difficulty";
     const string LEVELS_FOLDER = "Levels";
     const string SONGS_FOLDER = "Songs";
-#endregion
+
+    const string SCENE_MAINMENU = "MainMenu";
+    #endregion
 
     private int index = 0; // 곡 갯수
     private VideoPlayer video; // 비디오 로드 위함
@@ -51,6 +53,10 @@ public class SongLoader : MonoSingleton<SongLoader>
     {
         
         StartCoroutine(Read(() => {
+            if(SceneManager.GetActiveScene().name.CompareTo("SongLoader") == 0)
+            {
+                SceneManager.LoadScene(SCENE_MAINMENU);
+            }
             
             // TODO : Change scene?
         }));
@@ -144,6 +150,8 @@ public class SongLoader : MonoSingleton<SongLoader>
 
             ++index;
         } // for(int i = 0; i < path.Length; ++i) end
+
+        callback?.Invoke();
     }
 
 

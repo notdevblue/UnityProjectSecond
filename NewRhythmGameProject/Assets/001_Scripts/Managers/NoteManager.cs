@@ -7,9 +7,6 @@ public class NoteManager : MonoSingleton<NoteManager>
     public AudioSource noteSoundSource;
     public AudioSource song;
 
-#warning DEBUG CODE
-    public GameObject note;
-
     NoteJson noteData = new NoteJson();
 
     int firstIdx = 0;
@@ -33,12 +30,10 @@ public class NoteManager : MonoSingleton<NoteManager>
         // 곡 불러옴
         noteData = JsonUtility.FromJson<NoteJson>(SongLoader.Instance.GetSong(0).levels[1]); // TODO : 하드 코딩
 
-
-
         // 노래 넣음
         song.clip = SongLoader.Instance.GetSong(0).song;
 
-        Invoke(nameof(Play), 1.5f); // TODO : 딜레이
+        Invoke(nameof(Play), 1.5f);
     }
 
     private void Update() {
@@ -52,28 +47,27 @@ public class NoteManager : MonoSingleton<NoteManager>
         if (firstNoteIndex < noteData.firstLineNoteAppearTime.Count - 1 && CurrentTime >= noteData.firstLineNoteAppearTime[firstNoteIndex])
         {
 #warning DEBUG CODE
-            GameObject obj = Instantiate(note);
-            obj.SetActive(true);
+            GameObject temp = NotePoolManager.Instance.Get();
+            temp.transform.position = Vector2.up; // TODO : note position
             ++firstNoteIndex;
         }
         if (secondNoteIndex < noteData.secondLineNoteAppearTime.Count - 1 && CurrentTime >= noteData.secondLineNoteAppearTime[secondNoteIndex])
         {
 #warning DEBUG CODE
-            GameObject obj = Instantiate(note);
-            obj.SetActive(true);
+            GameObject temp = NotePoolManager.Instance.Get();
             ++secondNoteIndex;
         }
         if (thirdNoteIndex < noteData.thirdLineNoteAppearTime.Count - 1 && CurrentTime >= noteData.thirdLineNoteAppearTime[thirdNoteIndex])
         {
 #warning DEBUG CODE
-            GameObject obj = Instantiate(note);
-            obj.SetActive(true);
+            GameObject temp = NotePoolManager.Instance.Get();
+            temp.transform.position = Vector2.down; // TODO : note position
             ++thirdNoteIndex;
         }
 
 #endregion
 
-#region 판정
+#region 임시 판정?
 
         if(firstIdx < noteData.firstLineNote.Count - 1 && CurrentTime >= noteData.firstLineNote[firstIdx])
         {
@@ -105,5 +99,36 @@ public class NoteManager : MonoSingleton<NoteManager>
 
         isPlaying = true;
         CurrentTime   = 0;
+    }
+
+
+    /// <summary>
+    /// 입력 판정
+    /// </summary>
+    public void CheckInput(int line)
+    {
+        switch(line)
+        {
+            case 1:
+                if(CurrentTime < noteData.firstLineNote[firstIdx] + 0.1f && CurrentTime > noteData.firstLineNote[firstIdx] - 0.1f)
+                {
+                    Debug.Log("F Hit");
+                }
+                break;
+
+            case 2:
+                if(CurrentTime < noteData.secondLineNote[secondIdx] + 0.1f && CurrentTime > noteData.secondLineNote[secondIdx] - 0.1f)
+                {
+                    Debug.Log("S Hit");
+                }
+                break;
+
+            case 3:
+                if(CurrentTime < noteData.thirdLineNote[thirdIdx] + 0.1f && CurrentTime > noteData.thirdLineNote[thirdIdx] - 0.1f)
+                {
+                    Debug.Log("T Hit");
+                }
+                break;
+        }
     }
 }

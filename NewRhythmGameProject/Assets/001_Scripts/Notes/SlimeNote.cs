@@ -27,18 +27,8 @@ public class SlimeNote : NoteBase
 
     float time = 0;
 
-    // private void OnEnable()
-    // {
-    //     // Init(float noteSecond);
-    //     Init();
-    // }
-
-    private void Start()
+    private void OnEnable()
     {
-        Move();
-    }
-
-    private void Awake() {
         Init();
     }
 
@@ -48,6 +38,7 @@ public class SlimeNote : NoteBase
     public void Init()
     {
         float step = 0;
+        time = 0;
 
         for (int i = 0; i < beatPattern.Length; ++i)
         {
@@ -57,6 +48,8 @@ public class SlimeNote : NoteBase
 
         BeatsToPlayer = beatPattern.Length;
         CurrentStep = 0;
+
+        Move();
     }
 
     /// <summary>
@@ -64,7 +57,8 @@ public class SlimeNote : NoteBase
     /// </summary>
     private void Move()
     {
-        transform.position = Vector2.Lerp(begin.position, end.position, (float)(CurrentStep) / (BeatsToPlayer - 1.0f));
+        float x = Mathf.Lerp(begin.position.x, end.position.x, (float)(CurrentStep) / (BeatsToPlayer - 1.0f));
+        transform.position = new Vector2(x, transform.position.y);
     }
 
     void Update()
