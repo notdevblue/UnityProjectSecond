@@ -1,6 +1,15 @@
-public interface ISelectable
+using UnityEngine;
+
+abstract public class Selectable : MonoBehaviour
 {
-    public void Selected();
-    public void Focus();
-    public void DeFocus();
+    abstract public void Selected();
+    abstract public void Focus();
+    abstract public void DeFocus();
+
+    public void SetSelectIconTransform(Transform icon)
+    {
+        icon.SetParent(this.transform);
+        icon.localPosition = Vector3.up;
+        icon.eulerAngles = new Vector3(0, 0, -90.0f + transform.eulerAngles.z);
+    }
 }

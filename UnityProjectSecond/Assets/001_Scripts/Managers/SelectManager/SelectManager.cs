@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class SelectManager : MonoBehaviour
 {
     [SerializeField] private GameObject  cursor         = null;
-                     private ISelectable selectedObject = null; // 선택된 오브젝트
+    [SerializeField] private GameObject  selectIcon = null;     // 선택 아이콘
+                     private Selectable  selectedObject = null; // 선택된 오브젝트
 
     const string SELECTABLE = "SELECTABLE";
 
 
     private void Start()
     {
+        selectIcon.SetActive(false);
+
         InputHandler.Instance.OnKeyAttack += () => {
             selectedObject?.Selected();
         };
@@ -29,8 +33,14 @@ public class SelectManager : MonoBehaviour
     {
         if(other.transform.CompareTag(SELECTABLE))
         {
-            selectedObject = other.transform.GetComponent<ISelectable>();
-            selectedObject?.Focus();
+            selectedObject = other.transform.GetComponent<Selectable>();
+            if(selectedObject != null)
+            {
+                selectedObject.Focus();
+                selectIcon.SetActive(true);
+                selectedObject.SetSelectIconTransform(selectIcon.transform);
+            }
+            
         }
     }
 
@@ -40,6 +50,7 @@ public class SelectManager : MonoBehaviour
         {
             selectedObject?.DeFocus();
             selectedObject = null;
+            selectIcon.SetActive(false);
         }
     }
 }
