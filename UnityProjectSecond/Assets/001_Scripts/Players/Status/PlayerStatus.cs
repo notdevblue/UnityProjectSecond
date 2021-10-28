@@ -18,4 +18,13 @@ public class PlayerStatus : MonoSingleton<PlayerStatus>
     public bool jumpable   = true;
     public bool attackable = true;
     public bool dashable   = true;
+
+
+    public void ResetJumpStatus()
+    {
+        onGround = true;
+        jumpable = true;
+        isJumping = false;
+        isDoubleJumping = false;
+    }
 }

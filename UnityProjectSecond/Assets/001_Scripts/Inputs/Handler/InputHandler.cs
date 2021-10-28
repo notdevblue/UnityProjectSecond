@@ -37,14 +37,20 @@ public class InputHandler : MonoSingleton<InputHandler>
     /// </summary>
     public event Action OnIdle;
 
+    /// <summary>
+    /// 마우스 휠 y Delta 넘겨줌
+    /// </summary>
+    public event Action<float> OnMouseWheel;
+
     private void Awake()
     {
 
-        OnKeyRight  += () => { };
-        OnKeyLeft   += () => { };
-        OnKeyJump   += () => { };
-        OnKeyAttack += () => { };
-        OnKeyTime   += () => { };
+        OnKeyRight   += ()  => { };
+        OnKeyLeft    += ()  => { };
+        OnKeyJump    += ()  => { };
+        OnKeyAttack  += ()  => { };
+        OnKeyTime    += ()  => { };
+        OnMouseWheel += (y) => { };
     }
 
     private void Start()
@@ -83,6 +89,9 @@ public class InputHandler : MonoSingleton<InputHandler>
         {
             OnKeyTime();
         }
+
+        // Mouse Wheel Input
+        OnMouseWheel(Input.mouseScrollDelta.y);
 
         // idle
         if(!Input.anyKey)

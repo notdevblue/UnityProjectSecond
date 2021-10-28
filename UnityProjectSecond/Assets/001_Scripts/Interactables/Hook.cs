@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#warning 이름이 잘못됨
 public class Hook : MonoBehaviour, ISelectable
 {
     private int ignoreLayer;
@@ -10,11 +9,14 @@ public class Hook : MonoBehaviour, ISelectable
     private Transform playerTrm = null;
     private Rigidbody2D playerRigid = null;
 
+    [SerializeField] LayerMask whatIsPlayer; // Ray Ingore 용
+
     private void Start()
     {
         playerTrm = GameManager.Instance.player.transform;
         playerRigid = GameManager.Instance.player.GetComponent<Rigidbody2D>();
         ignoreLayer = ~(1 << gameObject.layer);
+        ignoreLayer -= (1 << whatIsPlayer);
     }
 
     public void DeFocus()
@@ -45,6 +47,9 @@ public class Hook : MonoBehaviour, ISelectable
                 
                 // 상태 저장
                 PlayerStatus.Instance.onHook = true;
+
+                //점프 상태 초기회
+                PlayerStatus.Instance.ResetJumpStatus();
             }
         }
     }

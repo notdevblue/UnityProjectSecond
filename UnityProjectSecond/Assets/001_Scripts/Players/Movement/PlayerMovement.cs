@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rigid = null;
 
-    [SerializeField] LayerMask whatIsGround;
+    [SerializeField] LayerMask whatIsGround; // 바닥 체크 용도
 
     private void Awake()
     {
@@ -22,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (PlayerStatus.Instance.moveable)
             {
-                // rigid.AddForce(Vector2.left * PlayerStats.Instance.speed * Time.deltaTime, ForceMode2D.Impulse);
                 transform.position += Vector3.left * PlayerStats.Instance.speed * Time.deltaTime;
+                
                 PlayerStatus.Instance.isMoving = true;
             }
         };
@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (PlayerStatus.Instance.moveable)
             {
-                // rigid.AddForce(Vector2.right * PlayerStats.Instance.speed * Time.deltaTime, ForceMode2D.Impulse);
                 transform.position += Vector3.right * PlayerStats.Instance.speed * Time.deltaTime;
                 PlayerStatus.Instance.isMoving = true;
             }
@@ -76,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (ray.collider != null)
         {
-            OnGround();
+            PlayerStatus.Instance.ResetJumpStatus();
         }
         else
         {
@@ -84,18 +83,6 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion // 바닥 채크
     }
-
-    /// <summary>
-    /// 바닥에 닿았을 때 실행됨
-    /// </summary>
-    private void OnGround()
-    {
-        PlayerStatus.Instance.onGround = true;
-        PlayerStatus.Instance.jumpable = true;
-        PlayerStatus.Instance.isJumping = false;
-        PlayerStatus.Instance.isDoubleJumping = false;
-    }
-    #warning 잘못된 코드 위치. 따로 나누어야 함, 훜 걸었을 때 실행해야 함
 
 
     private void ResetPhysics()
