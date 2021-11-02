@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPushable
 {
     private Rigidbody2D rigid = null;
 
@@ -91,5 +91,10 @@ public class PlayerMovement : MonoBehaviour
         {
             PhysicsManager.Instance.SetGravity(rigid);
         }
+    }
+
+    public void Push(Vector2 normal, float amount = 1)
+    {
+        PhysicsManager.Instance.PushObj(rigid, normal, amount);
     }
 }

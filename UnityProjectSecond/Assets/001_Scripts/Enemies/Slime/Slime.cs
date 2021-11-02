@@ -3,20 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(CircleCollider2D))]
 public class Slime : AIBase, IPushable
 {
+    const float DEATH_ANIM_TIME = 0.5f;
+
     private Rigidbody2D rigid;
 
     public event Action OnDamaged;
     public event Action OnDead;
-    
+    public event Action OnMove;
+    public event Action OnIdle;
+
+
 
     protected override void Awake()
     {
         base.Awake();
         rigid = GetComponent<Rigidbody2D>();
+        
         OnDamaged += () => { };
+        OnDead    += () => { };
+        OnMove    += () => { };
+        OnIdle    += () => { };
     }
 
     public override void OnDamage(int damage)
@@ -28,7 +37,7 @@ public class Slime : AIBase, IPushable
     protected override void Dead()
     {
         OnDead();
-        Invoke(nameof(Disable), 0.5f); // Dead 에니메이션 재생 시간
+        Invoke(nameof(Disable), DEATH_ANIM_TIME); // Dead 에니메이션 재생 시간
     }
 
     private void Disable()

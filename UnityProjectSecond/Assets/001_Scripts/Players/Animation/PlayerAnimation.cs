@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator       animator       = null;
-    private SpriteRenderer spriteRenderer = null;
+    private PlayerHealth   health         = null; // 데미지와 사망 이벤트
 
     private int jumpHash       = Animator.StringToHash("Jump");
     private int runHash        = Animator.StringToHash("Run");
     private int attackHash     = Animator.StringToHash("Attack");
     private int doubleJumpHasn = Animator.StringToHash("DoubleJump");
+    private int attackedHash   = Animator.StringToHash("Attacked");
+    private int deadHash       = Animator.StringToHash("Dead");
 
     private float lastAtktime = float.MinValue;
 
@@ -18,8 +20,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Awake()
     {
-        animator       = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        health   = GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -53,6 +55,13 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetTrigger(jumpHash);
         };
 
+        health.onDamage += () => {
+            animator.SetTrigger(attackedHash);
+        };
+
+        health.onDeath += () => {
+            animator.SetTrigger(deadHash);
+        };
 
         // Idle
         InputHandler.Instance.OnIdle += () =>

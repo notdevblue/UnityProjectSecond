@@ -19,6 +19,9 @@ public class PlayerStatus : MonoSingleton<PlayerStatus>
     public bool attackable = true;
     public bool dashable   = true;
 
+    public int maxHp = 20;
+    public int hp    = 20;
+
 
     public void ResetJumpStatus()
     {
