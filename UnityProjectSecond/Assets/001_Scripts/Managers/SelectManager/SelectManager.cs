@@ -6,7 +6,7 @@ using UnityEngine;
 public class SelectManager : MonoBehaviour
 {
     [SerializeField] private GameObject  cursor         = null;
-    [SerializeField] private GameObject  selectIcon = null;     // 선택 아이콘
+    [SerializeField] private GameObject  selectIcon     = null;     // 선택 아이콘
                      private Selectable  selectedObject = null; // 선택된 오브젝트
 
     const string SELECTABLE = "SELECTABLE";
@@ -23,7 +23,11 @@ public class SelectManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Debug.Log(Input.mousePosition);
+
+        // Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
         pos.z = 0.0f;
         cursor.transform.position = pos;
     }

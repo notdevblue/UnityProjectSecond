@@ -8,9 +8,10 @@ public class PlayerMovement : MonoBehaviour, IPushable
 
     [SerializeField] LayerMask whatIsGround; // 바닥 체크 용도
 
+
     private void Awake()
     {
-        rigid  = GetComponent<Rigidbody2D>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -23,7 +24,6 @@ public class PlayerMovement : MonoBehaviour, IPushable
             if (PlayerStatus.Instance.moveable)
             {
                 transform.position += Vector3.left * PlayerStats.Instance.speed * Time.deltaTime;
-                
                 PlayerStatus.Instance.isMoving = true;
             }
         };

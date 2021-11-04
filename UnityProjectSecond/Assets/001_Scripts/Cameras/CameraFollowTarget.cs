@@ -14,7 +14,7 @@ public class CameraFollowTarget : MonoSingleton<CameraFollowTarget>
 
     void FixedUpdate()
     {
-        Vector3 mousePos  = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos  = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
         Vector3 firstLerp = Vector3.Lerp(transform.position, target.position, followAmout);
         Vector3 pos       = Vector3.Lerp(firstLerp, mousePos, mouseFollowAmount);
                 pos.z     = -10;

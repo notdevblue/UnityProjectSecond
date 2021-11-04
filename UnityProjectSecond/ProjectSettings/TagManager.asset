@@ -47,11 +47,20 @@ TagManager:
   - name: WATERFALL
     uniqueID: 2547606203
     locked: 0
+  - name: WALL
+    uniqueID: 3192943379
+    locked: 0
   - name: BACKGROUND
     uniqueID: 2613894855
     locked: 0
   - name: SELECTABLE
     uniqueID: 2088786821
+    locked: 0
+  - name: ITEMS
+    uniqueID: 704018093
+    locked: 0
+  - name: ENEMY
+    uniqueID: 1435065197
     locked: 0
   - name: PLAYER
     uniqueID: 385356527
