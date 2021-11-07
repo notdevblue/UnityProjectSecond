@@ -7,6 +7,7 @@ TagManager:
   - GROUND
   - PLAYER
   - SELECTABLE
+  - DIALOG
   layers:
   - Default
   - TransparentFX

@@ -9,23 +9,20 @@ public class Hook : Selectable
     private const string PLAYER = "PLAYER";
 #endregion
 
-    private int ignoreLayer; // 무시할 레이어 들
+    private int layer; // 무시할 레이어 들
     private Transform playerTrm = null; // 플레이어 Transform
     private Rigidbody2D playerRigid = null; // 플레이어 RigidBody
 
-    [SerializeField] LayerMask whatIsPlayer; // Ray Ingore 용
-
     private void Start()
     {
-        playerTrm = GameManager.Instance.player.transform;
+        playerTrm   = GameManager.Instance.player.transform;
         playerRigid = GameManager.Instance.player.GetComponent<Rigidbody2D>();
-        ignoreLayer = ~(1 << gameObject.layer);
-        ignoreLayer -= (1 << whatIsPlayer);
+        layer       = LayerMask.GetMask("PLAYER");
     }
 
     public override void DeFocus()
     {
-
+        
     }
 
     public override void Focus()
@@ -41,7 +38,7 @@ public class Hook : Selectable
     public override void Selected()
     {
         // 사이에 가리는 것이 없는지 확인
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerTrm.position - transform.position, 10.0f, ignoreLayer);
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, playerTrm.position - transform.position, 10.0f, layer);
 
         if(ray.collider != null)
         {
