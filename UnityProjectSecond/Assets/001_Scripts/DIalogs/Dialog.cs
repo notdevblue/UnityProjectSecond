@@ -7,6 +7,7 @@ public class Dialog : MonoBehaviour
 {
     const string PLAYER = "PLAYER";
 
+    public bool doNotDisable = false; // 꺼지면 안되는 다이얼로그 용도
     [SerializeField] private int id;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -14,7 +15,7 @@ public class Dialog : MonoBehaviour
         if (other.CompareTag(PLAYER))
         {
             DialogManager.Instance.Show(id);
-            gameObject.SetActive(false); // 재생 후 삭제
+            gameObject.SetActive(doNotDisable); // 재생 후 삭제
         }
     }
 }

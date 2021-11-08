@@ -60,28 +60,34 @@ public class InputHandler : MonoSingleton<InputHandler>
 
     void Update()
     {
-        // Movement
-        if(Input.GetKey(input.right))
+        if (PlayerStatus.Instance.moveable)
         {
-            OnKeyRight();
-        }
-        if(Input.GetKey(input.left))
-        {
-            OnKeyLeft();
-        }
-        if(Input.GetKeyDown(input.jump))
-        {
-            OnKeyJump();
+            // Movement
+            if (Input.GetKey(input.right))
+            {
+                OnKeyRight();
+            }
+            if (Input.GetKey(input.left))
+            {
+                OnKeyLeft();
+            }
+            if (Input.GetKeyDown(input.jump))
+            {
+                OnKeyJump();
+            }
         }
 
-        // Attack
-        if(Input.GetKeyDown(input.atk))
+        if (PlayerStatus.Instance.attackable)
         {
-            OnKeyAttack();
-        }
-        if(Input.GetMouseButtonDown((int)input.atkMouse))
-        {
-            OnKeyAttack();
+            // Attack
+            if (Input.GetKeyDown(input.atk))
+            {
+                OnKeyAttack();
+            }
+            if (Input.GetMouseButtonDown((int)input.atkMouse))
+            {
+                OnKeyAttack();
+            }
         }
 
         // Time

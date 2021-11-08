@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour, IPushable
 
     private void Start()
     {
+
         // Movement
         InputHandler.Instance.OnKeyLeft += () =>
         {

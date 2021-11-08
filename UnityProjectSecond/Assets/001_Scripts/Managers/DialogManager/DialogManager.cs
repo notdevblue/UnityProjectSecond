@@ -22,10 +22,17 @@ public class DialogManager : MonoSingleton<DialogManager>
             (Resources.Load("DialogJson/Dialog") as TextAsset)
             .ToString())
                    .dialogs
-                   .ForEach(e => {
-                        dialogDict.Add(e.id, e);
-            }
+                   .ForEach(e =>
+                        dialogDict.Add(e.id, e)
         );
+    }
+
+    private void Update()
+    {
+        if(DialogInstance.Instance.IsOpen && Input.GetKeyDown(KeyCode.Space))
+        {
+            NextScript();
+        }
     }
 
     /// <summary>
@@ -43,8 +50,9 @@ public class DialogManager : MonoSingleton<DialogManager>
 
         Sprite icon = iconList[currentDialog.script[currentIdx].icon];
         string text = currentDialog.script[currentIdx].text;
+        string name = currentDialog.script[currentIdx].name;
 
-        DialogInstance.Instance.Show(text, icon);
+        DialogInstance.Instance.Show(text, name, icon);
     }
 
     /// <summary>

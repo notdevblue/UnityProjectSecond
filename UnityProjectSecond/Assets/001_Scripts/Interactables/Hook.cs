@@ -18,6 +18,7 @@ public class Hook : Selectable
         playerTrm   = GameManager.Instance.player.transform;
         playerRigid = GameManager.Instance.player.GetComponent<Rigidbody2D>();
         layer       = LayerMask.GetMask("PLAYER");
+        layer      += LayerMask.GetMask("GROUND");
     }
 
     public override void DeFocus()

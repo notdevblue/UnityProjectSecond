@@ -13,5 +13,7 @@ public class PlayerStats : MonoSingleton<PlayerStats>
     public float speed = 10.0f; // 이동 속도
     public float jumpForce = 10.0f; // 점프 힘
 
+    public float damageFreezeTime = 0.3f;
+
 
 }

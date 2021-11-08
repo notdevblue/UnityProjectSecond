@@ -16,5 +16,6 @@ public class DialogVO
 public class ScriptVO
 {
     public int icon;
+    public string name;
     public string text;
 }

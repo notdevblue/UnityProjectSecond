@@ -27,6 +27,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if(lastattackedTime + damageDelay > Time.time) return;
 
+        lastattackedTime               = Time.time;
         PlayerStatus.Instance.attacked = true;
         PlayerStatus.Instance.hp      -= damage;
 

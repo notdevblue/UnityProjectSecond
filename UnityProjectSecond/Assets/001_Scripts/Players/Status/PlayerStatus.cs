@@ -22,6 +22,26 @@ public class PlayerStatus : MonoSingleton<PlayerStatus>
     public int maxHp = 20;
     public int hp    = 20;
 
+    private void Start()
+    {
+        GetComponent<PlayerHealth>().onDamage += () => {
+            moveable = false;
+            attackable = false;
+            Invoke(nameof(AbleInput), PlayerStats.Instance.damageFreezeTime);
+        };
+
+        GetComponent<PlayerHealth>().onDeath += () => {
+            CancelInvoke();
+            moveable = false;
+            attackable = false;
+        };
+    }
+
+    private void AbleInput()
+    {
+        moveable = true;
+        attackable = true;
+    }
 
     public void ResetJumpStatus()
     {
@@ -30,4 +50,5 @@ public class PlayerStatus : MonoSingleton<PlayerStatus>
         isJumping = false;
         isDoubleJumping = false;
     }
+
 }
