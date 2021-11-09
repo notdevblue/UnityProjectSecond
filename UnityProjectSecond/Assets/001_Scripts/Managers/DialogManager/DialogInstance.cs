@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class DialogInstance : MonoSingleton<DialogInstance>
 
     [SerializeField] private RectTransform pannelRectTrm = null;
 
+    private Action _callback; // 닫힐때 호출되는 callback
+
     private bool isOpen = false;
     public bool IsOpen
     {
@@ -27,19 +30,19 @@ public class DialogInstance : MonoSingleton<DialogInstance>
         }
         private set
         {
-            isOpen = value;
+            Vector3 targetpos = value ? openedPos : closedTrm.position;
 
             // 열고 닫는 함수 만들기 싫었스빈다.
-            switch(value)
-            {
-                case true:
-                    pannelRectTrm.DOMove(openedPos, duration).SetEase(Ease.OutSine);
-                    break;
+            pannelRectTrm.DOMove(targetpos, duration).SetEase(Ease.InOutSine).OnComplete(() => {
+                ToggleInput();
+                isOpen = value;
 
-                case false:
-                    pannelRectTrm.DOMove(closedTrm.position, duration).SetEase(Ease.InSine);
-                    break;
-            }
+                if(!value)
+                {
+                    _callback?.Invoke();
+                    _callback = null;
+                }
+            });
         }
     }
 
@@ -56,13 +59,15 @@ public class DialogInstance : MonoSingleton<DialogInstance>
     /// </summary>
     /// <param name="text">텍스트</param>
     /// <param name="icon">아이콘</param>
-    public void Show(string text, string name, Sprite icon)
+    public void Show(string text, string name, Sprite icon, Action callback = null)
     {
         if(!IsOpen)
         {
-            ToggleInput();
             IsOpen = true; // 안 열려있으면 열어줌
         }
+
+        // Callback 저장
+        _callback = callback;
 
         // 이미지와 텍스트 설정
         this.text.text   = text;
@@ -75,7 +80,6 @@ public class DialogInstance : MonoSingleton<DialogInstance>
         // 닫혀있는 상태에서 닫히는 버그를 방지
         if(IsOpen)
         {
-            ToggleInput();
             IsOpen = false;
         }
     }
