@@ -8,11 +8,18 @@ public class SlimeAttack : AIAttack
     [SerializeField] private float atkDelay = 1.0f;
     [SerializeField] private float upPushForce = 1.5f;
 
+    private Slime slime;
+
+    private void Start()
+    {
+        slime = GetComponent<Slime>();
+    }
+
     float lastAttackTime = float.MinValue;
 
     protected override void Attack(Collision2D other)
     {
-        if (lastAttackTime + atkDelay < Time.time)
+        if (slime.isAttackable && lastAttackTime + atkDelay < Time.time)
         {
             lastAttackTime = Time.time;
 

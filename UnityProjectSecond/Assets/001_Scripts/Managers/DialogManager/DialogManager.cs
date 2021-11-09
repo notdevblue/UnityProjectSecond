@@ -39,7 +39,7 @@ public class DialogManager : MonoSingleton<DialogManager>
     /// 해당하는 ID의 다이얼로그를 보여줍니다.
     /// </summary>
     /// <param name="id">해당하는 다이얼로그의 id<br/>-1 인 경우 다이얼로그 로드 안함</param>
-    public void Show(int id = -1)
+    public void Show(int id = -1, System.Action action = null)
     {
         if(id != -1)
         {
@@ -52,7 +52,7 @@ public class DialogManager : MonoSingleton<DialogManager>
         string text = currentDialog.script[currentIdx].text;
         string name = currentDialog.script[currentIdx].name;
 
-        DialogInstance.Instance.Show(text, name, icon);
+        DialogInstance.Instance.Show(text, name, icon, action);
     }
 
     /// <summary>

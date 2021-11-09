@@ -8,6 +8,8 @@ public class Slime : AIBase, IPushable
 {
     private Rigidbody2D rigid;
 
+    public bool isAttackable = true;
+
     protected override void Awake()
     {
         base.Awake();

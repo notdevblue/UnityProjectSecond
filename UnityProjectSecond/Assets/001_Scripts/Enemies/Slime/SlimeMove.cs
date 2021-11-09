@@ -16,6 +16,7 @@ public class SlimeMove : AIMove
 
         slime.OnDead += () => {
             isMoving = false;
+            slime.isAttackable = false;
         };
 
         slime.OnDamaged += () => {
