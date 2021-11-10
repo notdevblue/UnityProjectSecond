@@ -20,22 +20,37 @@ public class PlayerMovement : MonoBehaviour, IPushable
         // Movement
         InputHandler.Instance.OnKeyLeft += () =>
         {
-            ResetPhysics();
-
             if (PlayerStatus.Instance.moveable)
             {
-                transform.position += Vector3.left * PlayerStats.Instance.speed * Time.deltaTime;
+                switch(PlayerStatus.Instance.onHook)
+                {
+                    case true:
+                        GameManager.Instance.curHookedRigid.AddTorque(-PlayerStats.Instance.swingForce * Time.deltaTime, ForceMode2D.Impulse);
+                        break;
+
+                    case false:
+                        transform.position += Vector3.left * PlayerStats.Instance.speed * Time.deltaTime;
+                        break;
+                }
                 PlayerStatus.Instance.isMoving = true;
             }
         };
 
         InputHandler.Instance.OnKeyRight += () =>
         {
-            ResetPhysics();
 
             if (PlayerStatus.Instance.moveable)
             {
-                transform.position += Vector3.right * PlayerStats.Instance.speed * Time.deltaTime;
+                switch (PlayerStatus.Instance.onHook)
+                {
+                    case true:
+                        GameManager.Instance.curHookedRigid.AddTorque(PlayerStats.Instance.swingForce * Time.deltaTime, ForceMode2D.Impulse);
+                        break;
+
+                    case false:
+                        transform.position += Vector3.right * PlayerStats.Instance.speed * Time.deltaTime;
+                        break;
+                }
                 PlayerStatus.Instance.isMoving = true;
             }
         };
@@ -43,20 +58,32 @@ public class PlayerMovement : MonoBehaviour, IPushable
         // Jump
         InputHandler.Instance.OnKeyJump += () =>
         {
-            ResetPhysics();
+            if(PlayerStatus.Instance.onHook)
+            {
+                ResetPhysics();
+                PlayerStatus.Instance.onHook = false;
+                transform.SetParent(null);
+                GameManager.Instance.curHookedRigid = null;
+            }
 
             if (PlayerStatus.Instance.jumpable)
             {
-                if (!PlayerStatus.Instance.isJumping && PlayerStatus.Instance.onGround)
+                switch(!PlayerStatus.Instance.isJumping && PlayerStatus.Instance.onGround)
                 {
-                    PlayerStatus.Instance.isJumping = true;
-                    PlayerStatus.Instance.onGround = false;
-                }
-                else
-                {
-                    PlayerStatus.Instance.isDoubleJumping = true;
-                    PlayerStatus.Instance.jumpable = false;
-                    rigid.velocity = rigid.velocity * Vector2.right;
+                    case true: // 일반 점프
+                        PlayerStatus.Instance.isJumping = true;
+                        PlayerStatus.Instance.onGround = false;
+                        break;
+
+                    case false: // 더블 점프
+                        PlayerStatus.Instance.isDoubleJumping = true;
+                        PlayerStatus.Instance.jumpable = false;
+
+                        if (!PlayerStatus.Instance.onHook)
+                        {
+                            rigid.velocity = new Vector2(rigid.velocity.x, 0.0f);
+                        }
+                        break;
                 }
 
                 rigid.AddForce(Vector2.up * PlayerStats.Instance.jumpForce, ForceMode2D.Impulse);
@@ -83,6 +110,8 @@ public class PlayerMovement : MonoBehaviour, IPushable
             PlayerStatus.Instance.onGround = false;
         }
         #endregion // 바닥 채크
+
+        transform.rotation = Quaternion.identity; // 훅 때문에 Rigidbody 에서 z 축 회전을 고정시켜도 Parent 의 영향을 받게 되서
     }
 
 
