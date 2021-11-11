@@ -11,10 +11,13 @@ public class PlayerStats : MonoSingleton<PlayerStats>
 
     // 이동
     public float speed = 10.0f; // 이동 속도
+    public float vSpeed = 5.0f; // 수직 이동 속도
     public float jumpForce = 10.0f; // 점프 힘
     public float swingForce = 5.0f; // 훅 스윙 힘
 
     public float damageFreezeTime = 0.3f;
+
+
 
 
 }

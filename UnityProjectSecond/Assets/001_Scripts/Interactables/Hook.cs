@@ -11,24 +11,15 @@ public class Hook : Selectable
 
     private int layer; // 무시할 레이어 들
     private Transform playerTrm = null; // 플레이어 Transform
-    private Rigidbody2D playerRigid = null; // 플레이어 RigidBody
 
-    private Rigidbody2D hookPositionRigid; // 훅 거는 위치의 Rigidbody2D
-
-    private bool hooked = false;
+    private HingeJoint2D hookPositionHinge; // 훅 거는 위치의 HingeJoint2D
 
     private void Start()
     {
         playerTrm         = GameManager.Instance.player.transform;
-        playerRigid       = GameManager.Instance.player.GetComponent<Rigidbody2D>();
-        hookPositionRigid = GetComponentInChildren<Rigidbody2D>();
+        hookPositionHinge = GetComponentInChildren<HingeJoint2D>();
         layer             = LayerMask.GetMask("PLAYER");
         layer            += LayerMask.GetMask("GROUND");
-
-
-        InputHandler.Instance.OnKeyJump += () => {
-            hooked = false;
-        };
     }
 
     public override void DeFocus()
@@ -80,32 +71,26 @@ public class Hook : Selectable
 
         if(ray.collider != null)
         {
-            if(ray.collider.CompareTag(PLAYER))
+            if(ray.collider.CompareTag(PLAYER) && GameManager.Instance.CanHook(transform.position))
             {
-                playerTrm.SetParent(hookPositionRigid.transform);
+                if(GameManager.Instance.curHookedHinge != null)
+                {
+                    // 연결 해제 후 연결
+                    GameManager.Instance.ResetConnectedHinge();
 
-                // 위치에 고정
-                // PhysicsManager.Instance.SetVelocity(playerRigid, Vector2.zero);
-                // PhysicsManager.Instance.SetGravity(playerRigid, 0.0f);
+                }
+
+                // 연결
+                playerTrm.SetParent(this.transform); // y 움직임 때문에
+                hookPositionHinge.connectedBody = GameManager.Instance.PlayerHingeRigid;
 
                 // 상태 저장
                 PlayerStatus.Instance.onHook = true;
-                hooked = true;
-                GameManager.Instance.curHookedRigid = hookPositionRigid;
+                GameManager.Instance.curHookedHinge = hookPositionHinge;
 
                 //점프 상태 초기회
                 PlayerStatus.Instance.ResetJumpStatus();
             }
         }
     }
-
-    private void Update()
-    {
-        if(hooked)
-        {
-            playerTrm.localPosition = Vector2.up * GameManager.Instance.distanceWithHook;
-        }
-    }
-
-
 }

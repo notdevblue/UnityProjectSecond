@@ -18,9 +18,20 @@ public class InputHandler : MonoSingleton<InputHandler>
     public event Action OnKeyLeft;
 
     /// <summary>
+    /// 위 이동 키 눌렀을 때 계속 호출됨
+    /// </summary>
+    public event Action OnKeyUp;
+
+    /// <summary>
+    /// 아레 이동 키 눌렀을 때 계속 호출됨
+    /// </summary>
+    public event Action OnKeyDown;
+
+    /// <summary>
     /// 점프 시 호출됨
     /// </summary>
     public event Action OnKeyJump;
+
 
     /// <summary>
     /// 공격 버튼을 눌렀을 시 호출됨
@@ -47,6 +58,8 @@ public class InputHandler : MonoSingleton<InputHandler>
 
         OnKeyRight   += ()  => { };
         OnKeyLeft    += ()  => { };
+        OnKeyUp      += ()  => { };
+        OnKeyDown    += ()  => { };
         OnKeyJump    += ()  => { };
         OnKeyAttack  += ()  => { };
         OnKeyTime    += ()  => { };
@@ -75,6 +88,17 @@ public class InputHandler : MonoSingleton<InputHandler>
             {
                 OnKeyJump();
             }
+
+            // 지금은 Hook 상태일때의 이동밖에 없습니다.
+            if (Input.GetKey(input.up))
+            {
+                OnKeyUp();
+            }
+            if(Input.GetKey(input.down))
+            {
+                OnKeyDown();
+            }
+
         }
 
         if (PlayerStatus.Instance.attackable)

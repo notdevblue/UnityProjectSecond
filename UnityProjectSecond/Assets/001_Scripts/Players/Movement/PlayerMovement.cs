@@ -16,56 +16,36 @@ public class PlayerMovement : MonoBehaviour, IPushable
 
     private void Start()
     {
-
         // Movement
-        InputHandler.Instance.OnKeyLeft += () =>
-        {
-            if (PlayerStatus.Instance.moveable)
+        InputHandler.Instance.OnKeyLeft += () => {
+            if (PlayerStatus.Instance.moveable && !PlayerStatus.Instance.onHook)
             {
-                switch(PlayerStatus.Instance.onHook)
-                {
-                    case true:
-                        GameManager.Instance.curHookedRigid.AddTorque(-PlayerStats.Instance.swingForce * Time.deltaTime, ForceMode2D.Impulse);
-                        break;
+                Vector2 speed = Vector2.left * PlayerStats.Instance.speed * Time.deltaTime;
 
-                    case false:
-                        transform.position += Vector3.left * PlayerStats.Instance.speed * Time.deltaTime;
-                        break;
-                }
+                // if (!PlayerStatus.Instance.onGround) // 훅 이동 때문에
+                //     rigid.AddForce(speed, ForceMode2D.Impulse);
+                transform.position += (Vector3)speed;
+
                 PlayerStatus.Instance.isMoving = true;
             }
         };
 
-        InputHandler.Instance.OnKeyRight += () =>
-        {
-
-            if (PlayerStatus.Instance.moveable)
+        InputHandler.Instance.OnKeyRight += () => {
+            if (PlayerStatus.Instance.moveable && !PlayerStatus.Instance.onHook)
             {
-                switch (PlayerStatus.Instance.onHook)
-                {
-                    case true:
-                        GameManager.Instance.curHookedRigid.AddTorque(PlayerStats.Instance.swingForce * Time.deltaTime, ForceMode2D.Impulse);
-                        break;
+                Vector2 speed = Vector2.right * PlayerStats.Instance.speed * Time.deltaTime;
 
-                    case false:
-                        transform.position += Vector3.right * PlayerStats.Instance.speed * Time.deltaTime;
-                        break;
-                }
+                // if(!PlayerStatus.Instance.onGround) // 훅 이동 때문에
+                //     rigid.AddForce(speed, ForceMode2D.Impulse);
+                transform.position += (Vector3)speed;
+
                 PlayerStatus.Instance.isMoving = true;
             }
         };
 
         // Jump
-        InputHandler.Instance.OnKeyJump += () =>
-        {
-            if(PlayerStatus.Instance.onHook)
-            {
-                ResetPhysics();
-                PlayerStatus.Instance.onHook = false;
-                transform.SetParent(null);
-                GameManager.Instance.curHookedRigid = null;
-            }
-
+        InputHandler.Instance.OnKeyJump += () => {
+            
             if (PlayerStatus.Instance.jumpable)
             {
                 switch(!PlayerStatus.Instance.isJumping && PlayerStatus.Instance.onGround)
@@ -79,16 +59,16 @@ public class PlayerMovement : MonoBehaviour, IPushable
                         PlayerStatus.Instance.isDoubleJumping = true;
                         PlayerStatus.Instance.jumpable = false;
 
-                        if (!PlayerStatus.Instance.onHook)
-                        {
-                            rigid.velocity = new Vector2(rigid.velocity.x, 0.0f);
-                        }
+                        rigid.velocity = new Vector2(rigid.velocity.x, PlayerStatus.Instance.onHook ? rigid.velocity.y : 0.0f);
+
                         break;
                 }
 
                 rigid.AddForce(Vector2.up * PlayerStats.Instance.jumpForce, ForceMode2D.Impulse);
             }
-        };
+
+            PlayerStatus.Instance.onHook = false; // 후...
+        }; // OnKeyJump() end
 
         InputHandler.Instance.OnIdle += () =>
         {
@@ -110,17 +90,6 @@ public class PlayerMovement : MonoBehaviour, IPushable
             PlayerStatus.Instance.onGround = false;
         }
         #endregion // 바닥 채크
-
-        transform.rotation = Quaternion.identity; // 훅 때문에 Rigidbody 에서 z 축 회전을 고정시켜도 Parent 의 영향을 받게 되서
-    }
-
-
-    private void ResetPhysics()
-    {
-        if(PlayerStatus.Instance.onHook)
-        {
-            PhysicsManager.Instance.SetGravity(rigid);
-        }
     }
 
     public void Push(Vector2 normal, float amount = 1)
