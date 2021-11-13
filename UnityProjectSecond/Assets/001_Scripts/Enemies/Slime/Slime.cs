@@ -3,18 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(CircleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D), typeof(CircleCollider2D))]
 public class Slime : AIBase, IPushable
 {
-    private Rigidbody2D rigid;
-
     public bool isAttackable = true;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        rigid = GetComponent<Rigidbody2D>();
-    }
 
     public void Push(Vector2 normal, float amount = 1)
     {

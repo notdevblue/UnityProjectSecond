@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator), typeof(Slime))]
 public class SlimeAnimation : MonoBehaviour
 {
     private Animator animator = null;
@@ -20,6 +21,7 @@ public class SlimeAnimation : MonoBehaviour
     {
         slime.OnDamaged += () => {
             animator.SetTrigger(attackedHash);
+            slime.SetActFinished();
         };
 
         slime.OnDead += () => {

@@ -23,11 +23,11 @@ AssetImportWorker0
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-46167
+41745
 Successfully changed project path to: /home/han/Documents/Unity/UnityProjectSecond/UnityProjectSecond
 /home/han/Documents/Unity/UnityProjectSecond/UnityProjectSecond
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 77.42 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 63.93 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.19f1 (68f137dc9bbe)
 [Subsystems] Discovering subsystems at path /home/han/Unity/Hub/Editor/2020.3.19f1/Editor/Data/Resources/UnitySubsystems
@@ -127,8 +127,8 @@ Vulkan detection: 2
 [vulkan] Loaded instance function vkGetPhysicalDeviceMemoryProperties2KHR
 [vulkan] Loaded instance function vkGetPhysicalDeviceSparseImageFormatProperties2KHR
 [Vulkan init] SelectPhysicalDevice requestedDeviceIndex=-1 xrDevice=(nil)
-[Vulkan init] Physical Device 0x5638619b78b0 [0]: "NVIDIA GeForce RTX 2060" deviceType=2 vendorID=10de deviceID=1f11
-[Vulkan init] Selected physical device 0x5638619b78b0
+[Vulkan init] Physical Device 0x55944103a260 [0]: "NVIDIA GeForce RTX 2060" deviceType=2 vendorID=10de deviceID=1f11
+[Vulkan init] Selected physical device 0x55944103a260
 [Vulkan init] Graphics queue count=1
 [Vulkan init] extensions: count=144
 [Vulkan init] extensions: name=VK_KHR_16bit_storage, enabled=0
@@ -425,37 +425,37 @@ Initialize mono
 Mono path[0] = '/home/han/Unity/Hub/Editor/2020.3.19f1/Editor/Data/Managed'
 Mono path[1] = '/home/han/Unity/Hub/Editor/2020.3.19f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = '/home/han/Unity/Hub/Editor/2020.3.19f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56111
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56771
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: /home/han/Unity/Hub/Editor/2020.3.19f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
-Registered in 0.002242 seconds.
+Registered in 0.001297 seconds.
 Native extension for LinuxStandalone target not found
-Refreshing native plugins compatible for Editor in 68.30 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 63.86 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.143 seconds
+- Completed reload, in  1.136 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1144ms)
-		BeginReloadAssembly (30ms)
+	ReloadAssembly (1137ms)
+		BeginReloadAssembly (29ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (439ms)
-			LoadAssemblies (28ms)
+		EndReloadAssembly (437ms)
+			LoadAssemblies (27ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (148ms)
+			SetupTypeCache (156ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (35ms)
-			SetupLoadedEditorAssemblies (203ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (196ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (68ms)
+				RefreshPlugins (64ms)
 				BeforeProcessingInitializeOnLoad (8ms)
-				ProcessInitializeOnLoadAttributes (93ms)
+				ProcessInitializeOnLoadAttributes (92ms)
 				ProcessInitializeOnLoadMethodAttributes (28ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
@@ -463,51 +463,51 @@ Domain Reload Profiling:
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.003331 seconds.
+Registered in 0.003267 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for LinuxStandalone target not found
-Refreshing native plugins compatible for Editor in 66.61 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 63.90 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.177 seconds
+- Completed reload, in  1.182 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1178ms)
-		BeginReloadAssembly (121ms)
+	ReloadAssembly (1183ms)
+		BeginReloadAssembly (119ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (17ms)
-		EndReloadAssembly (996ms)
+		EndReloadAssembly (1006ms)
 			LoadAssemblies (73ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (341ms)
+			SetupTypeCache (348ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (60ms)
-			SetupLoadedEditorAssemblies (397ms)
+			RebuildScriptCaches (64ms)
+			SetupLoadedEditorAssemblies (394ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (10ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (67ms)
-				BeforeProcessingInitializeOnLoad (84ms)
-				ProcessInitializeOnLoadAttributes (214ms)
+				RefreshPlugins (64ms)
+				BeforeProcessingInitializeOnLoad (81ms)
+				ProcessInitializeOnLoadAttributes (216ms)
 				ProcessInitializeOnLoadMethodAttributes (18ms)
 				AfterProcessingInitializeOnLoad (4ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler after 0.01 seconds
-Refreshing native plugins compatible for Editor in 0.69 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 0.67 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3425 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 152.7 MB.
+System memory in use before: 152.8 MB.
 System memory in use after: 152.9 MB.
 
 Unloading 29 unused Assets to reduce memory usage. Loaded Objects now: 3868.
-Total: 6.121433 ms (FindLiveObjects: 0.391939 ms CreateObjectMapping: 0.196326 ms MarkObjects: 5.302466 ms  DeleteObjects: 0.229017 ms)
+Total: 5.841314 ms (FindLiveObjects: 0.354248 ms CreateObjectMapping: 0.182764 ms MarkObjects: 5.084133 ms  DeleteObjects: 0.218948 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -520,9 +520,33 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
+  path: Assets/002_Prefabs/Player.prefab
+  artifactKey: Guid(c6359c9fa80387673ab57153354e0edd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/002_Prefabs/Player.prefab using Guid(c6359c9fa80387673ab57153354e0edd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebf5bf4cae95e4cd5d75db9e133a1ea6') in 0.220343 seconds 
+  Import took 0.227051 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.897278 seconds.
   path: ProjectSettings/TagManager.asset
   artifactKey: Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cfc5ea56733b57f00dce1df78c56347') in 0.012922 seconds 
-  Import took 0.018941 seconds .
+Start importing ProjectSettings/TagManager.asset using Guid(00000000000000003000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d64a51fea6e376be2afb968b8a91473') in 0.001837 seconds 
+  Import took 0.007081 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.560496 seconds.
+  path: Assets/002_Prefabs/Enemys/Slime.prefab
+  artifactKey: Guid(fbbf41a0840b8360daa6ec2aeb3c76ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/002_Prefabs/Enemys/Slime.prefab using Guid(fbbf41a0840b8360daa6ec2aeb3c76ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e688df43439c3a45f48b1e4cf7816e3') in 0.011439 seconds 
+  Import took 0.018089 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.484523 seconds.
+  path: Assets/002_Prefabs/Enemys/Full/Slime.prefab
+  artifactKey: Guid(7df944cf245badd949019974938da84c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/002_Prefabs/Enemys/Full/Slime.prefab using Guid(7df944cf245badd949019974938da84c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7bd827835aedb79215ca958ae91e05ff') in 0.009181 seconds 
+  Import took 0.015247 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

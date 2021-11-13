@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class AIMove : MonoBehaviour
+[RequireComponent(typeof(AIBase), typeof(Rigidbody2D))]
+abstract public class AIMove : MonoBehaviour
 {
     const float FULL   = 1.0f;
     const float WEIGHT = 0.6f;
-    const float HALF   = 0.5f;
+    const float HALF   = FULL / 2.0f;
     const float LESS   = FULL - WEIGHT;
     const float ZERO   = 0.0f;
 
@@ -23,9 +23,20 @@ public class AIMove : MonoBehaviour
 
     protected float moveDelay;
 
-    private void Awake()
+    private AIBase aiBase = null;
+
+    
+
+    protected virtual void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Start()
+    {
+        aiBase = GetComponent<AIBase>();
+
+        aiBase.AddDecision(new AIVO(SetMove));
     }
 
     public Vector2 GetFront()
@@ -49,7 +60,14 @@ public class AIMove : MonoBehaviour
         transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
     }
 
-    protected void Move()
+    abstract protected void SetMove(); // AIBase.AddDecision(SetMove);
+
+    protected virtual void MoveEnded() // Animation clip 에서 호출함
+    {
+        aiBase.SetActFinished();
+    }
+
+    protected void Move() // Animation clip 에서 호출함
     {
         float decideRightWeight;
 
@@ -89,5 +107,5 @@ public class AIMove : MonoBehaviour
         {
             SetLeft();
         }
-    }
+    } // Move() end
 }

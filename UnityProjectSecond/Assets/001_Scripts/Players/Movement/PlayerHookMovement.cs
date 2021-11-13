@@ -34,15 +34,15 @@ public class PlayerHookMovement : MonoBehaviour
         };
 
         InputHandler.Instance.OnKeyJump += () => {
-            GameManager.Instance.ResetConnectedHinge();
+            HookManager.Instance.ResetConnectedHinge();
         };
 
         InputHandler.Instance.OnKeyUp += () => {
             if(PlayerStatus.Instance.onHook)
             {
-                float yLength = GameManager.Instance.curHookedHinge.transform.position.y - transform.position.y;
+                float yLength = HookManager.Instance.CurHookedHinge.transform.position.y - transform.position.y;
 
-                if(GameManager.Instance.minDistWithHook < yLength)
+                if(HookManager.Instance.minDistWithHook < yLength)
                 {
                     transform.position += transform.up * PlayerStats.Instance.vSpeed * Time.deltaTime;
                 }
@@ -53,9 +53,9 @@ public class PlayerHookMovement : MonoBehaviour
         InputHandler.Instance.OnKeyDown += () => {
             if (PlayerStatus.Instance.onHook)
             {
-                float yLength = GameManager.Instance.curHookedHinge.transform.position.y - transform.position.y;
+                float yLength = HookManager.Instance.CurHookedHinge.transform.position.y - transform.position.y;
 
-                if (GameManager.Instance.maxDistWithHook > yLength)
+                if (HookManager.Instance.maxDistWithHook > yLength)
                 {
                     transform.position -= transform.up * PlayerStats.Instance.vSpeed * Time.deltaTime;
                 }
