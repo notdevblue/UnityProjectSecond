@@ -11,19 +11,21 @@ abstract public class AIBase : MonoBehaviour, IDamageable
     public event Action OnDamaged; // 데미지 받았을 시 호출
     public event Action OnDead; // 사망 시 호출
 
-    [SerializeField] private int maxHp = 20;
+    [SerializeField] protected int maxHp = 20;
     [SerializeField] private float DEATH_ANIM_TIME = 0.5f; // 사망 에니메이션 끝난 후 Disable 위해
     [SerializeField] private float decisionDelayTime = 2.0f;
     [SerializeField] private float decisionDelayRandomTime = 0.5f;
 
     protected Rigidbody2D rigid;
+    protected int curHp; // curHp = maxHp
     
-    private int curHp; // curHp = maxHp
     private List<AIVO> decisionList = new List<AIVO>(); // 선택 위함
 
     private bool decisionActFinished = true; // 선택한 행동이 끝났는지
 
     private float nextDecisionTime = float.MinValue; // 다음 선택 시간
+
+
 
     protected virtual void Awake()
     {
@@ -37,8 +39,8 @@ abstract public class AIBase : MonoBehaviour, IDamageable
 
     protected virtual void Update()
     {
-
-        if (decisionActFinished && nextDecisionTime <= Time.time)
+        // 다음 행동 선택
+        if (CanDecide())
         {
             nextDecisionTime = Time.time + UnityEngine.Random.Range(decisionDelayTime - decisionDelayRandomTime, decisionDelayTime + decisionDelayRandomTime);
 
@@ -51,7 +53,16 @@ abstract public class AIBase : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void OnDamage(int damage)
+    /// <summary>
+    /// 선택을 정할 수 있는지 여부
+    /// </summary>
+    /// <returns>True when slime can decide</returns>
+    protected virtual bool CanDecide()
+    {
+        return decisionActFinished && nextDecisionTime <= Time.time;
+    }
+
+    public virtual void OnDamage(int damage) // 데미지 받았을 시 호출
     {
         curHp -= damage;
         OnDamaged();
@@ -59,7 +70,7 @@ abstract public class AIBase : MonoBehaviour, IDamageable
             Dead();
     }
 
-    protected virtual void Dead()
+    protected virtual void Dead() // 사망 시 호출
     {
         Invoke(nameof(Disable), DEATH_ANIM_TIME); // Dead 에니메이션 재생 시간
         OnDead();
