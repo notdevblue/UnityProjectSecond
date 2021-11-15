@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SlimeAttack : AIAttack
 {
-    [SerializeField] private int   damage   = 1;
-    [SerializeField] private float atkDelay = 1.0f;
-    [SerializeField] private float upPushForce = 1.5f;
 
     private Slime slime;
 
@@ -14,8 +11,6 @@ public class SlimeAttack : AIAttack
     {
         slime = GetComponent<Slime>();
     }
-
-    float lastAttackTime = float.MinValue;
 
     protected override void Attack(Collision2D other)
     {

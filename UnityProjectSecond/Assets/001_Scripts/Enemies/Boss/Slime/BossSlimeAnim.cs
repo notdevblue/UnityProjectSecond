@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator), typeof(BossSlime))]
 public class BossSlimeAnim : MonoBehaviour
 {
-    [SerializeField] private float idleTime       = 0.5f;
-    [SerializeField] private float idleTimeRandom = 0.2f;
+    // [SerializeField] private float idleTime       = 0.5f;
+    // [SerializeField] private float idleTimeRandom = 0.2f;
 
     private BossSlime bossSlime = null;
     private Animator animator   = null;
@@ -45,6 +45,7 @@ public class BossSlimeAnim : MonoBehaviour
 
         bossSlime.OnExhausted += () => { // Exhausted enter
             animator.SetBool(exhaustedHash, true);
+            
         };
 
         bossSlime.OnExhaustedEnd += () => { // Exhausted exit

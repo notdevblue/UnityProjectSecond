@@ -12,6 +12,13 @@ public class CameraFollowTarget : MonoSingleton<CameraFollowTarget>
     [Range(0.0f, 1.0f)]
     [SerializeField] private float mouseFollowAmount = 0.8f;
 
+    private float defaultMouseFollowAmount = 0.0f; // 따라가면 안되는 일이 있음
+
+    private void Awake()
+    {
+        defaultMouseFollowAmount = mouseFollowAmount;
+    }
+
     void FixedUpdate()
     {
         Vector3 mousePos  = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
@@ -26,4 +33,21 @@ public class CameraFollowTarget : MonoSingleton<CameraFollowTarget>
     {
         this.target = target;
     }
+
+    /// <summary>
+    /// 마우스 추적을 비활성화합니다.
+    /// </summary>
+    public void DisableMouseFollow()
+    {
+        mouseFollowAmount = 0.0f;
+    }
+
+    /// <summary>
+    /// 마우스 추적을 활성화합니다.
+    /// </summary>
+    public void EnableMouseFollow()
+    {
+        mouseFollowAmount = defaultMouseFollowAmount;
+    }
+
 }

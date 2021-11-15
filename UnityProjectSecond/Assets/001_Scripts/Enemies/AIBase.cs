@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// 보스든 슬라임이든 모든 AI 가 상속받는 클래스<br/>~보스 슬라임이면 당연히 상속받아햐하는것인가?~
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 abstract public class AIBase : MonoBehaviour, IDamageable
 {
@@ -23,7 +25,7 @@ abstract public class AIBase : MonoBehaviour, IDamageable
 
     private bool decisionActFinished = true; // 선택한 행동이 끝났는지
 
-    private float nextDecisionTime = float.MinValue; // 다음 선택 시간
+    protected float nextDecisionTime = 0; // 다음 선택 시간 (보스 AI 때문에 protected)
 
 
 
@@ -35,6 +37,8 @@ abstract public class AIBase : MonoBehaviour, IDamageable
 
         OnDamaged += () => { };
         OnDead    += () => { };
+
+        nextDecisionTime = Time.time;
     }
 
     protected virtual void Update()
@@ -59,7 +63,7 @@ abstract public class AIBase : MonoBehaviour, IDamageable
     /// <returns>True when slime can decide</returns>
     protected virtual bool CanDecide()
     {
-        return decisionActFinished && nextDecisionTime <= Time.time;
+        return decisionActFinished && nextDecisionTime <= Time.time && GameManager.Instance.OnBossBattle;
     }
 
     public virtual void OnDamage(int damage) // 데미지 받았을 시 호출
@@ -70,9 +74,10 @@ abstract public class AIBase : MonoBehaviour, IDamageable
             Dead();
     }
 
-    protected virtual void Dead() // 사망 시 호출
+    protected virtual void Dead(bool DO_NOT_DISABLE = false) // 사망 시 호출
     {
-        Invoke(nameof(Disable), DEATH_ANIM_TIME); // Dead 에니메이션 재생 시간
+        if(!DO_NOT_DISABLE)
+            Invoke(nameof(Disable), DEATH_ANIM_TIME); // Dead 에니메이션 재생 시간
         OnDead();
     }
 

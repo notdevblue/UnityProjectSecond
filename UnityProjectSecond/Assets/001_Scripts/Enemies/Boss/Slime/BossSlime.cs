@@ -30,6 +30,10 @@ public class BossSlime : AIBase
         };
 
         OnExhaustedEnd += () => { };
+
+        GameManager.Instance.OnBossBattleEnter += () => { // 들어가자마자 바로 공격하는건 초큼...
+            nextDecisionTime = Time.time;
+        };
     }
 
     protected override bool CanDecide()
@@ -42,6 +46,11 @@ public class BossSlime : AIBase
         if(CheckExhausted()) SetExhausted();
 
         base.OnDamage(damage);
+    }
+
+    protected override void Dead(bool DO_NOT_DISABLE = false) // Disable 이 아닌 Destroy 할 것
+    {  
+        base.Dead(true);
     }
 
     /// <summary>
@@ -72,6 +81,12 @@ public class BossSlime : AIBase
     {
         Exhausted = false;
         OnExhaustedEnd();
+    }
+
+    protected new void Disable() // Dead 에니메이션 클립에서 실행됨
+    {
+        GameManager.Instance.OnBossBattle = false;
+        Destroy(gameObject);
     }
 
 }
