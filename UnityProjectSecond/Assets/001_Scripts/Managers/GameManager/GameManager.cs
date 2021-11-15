@@ -20,7 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Start()
     {
         playerBorder = GameObject.FindGameObjectWithTag("BORDER");
-        playerBorder.SetActive(false);
+        playerBorder?.SetActive(false);
         OnBossBattleEnter += () => { };
     }
 

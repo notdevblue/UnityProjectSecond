@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/004_Scenes/LightTimeTestScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/004_Scenes/DemoStage.unity
+    guid: fbe536fb414987a6ea26c53efc5091f0
+  - enabled: 1
+    path: Assets/004_Scenes/DemoBoss.unity
+    guid: 34bd6e128e14128f293053a7193c66d5
   m_configObjects: {}

@@ -14,11 +14,13 @@ public class CameraZoom : MonoSingleton<CameraZoom>
 
     void Start()
     {
+        CanZoom = true;
+
         InputHandler.Instance.OnMouseWheel += y => {
             if (CanZoom)
             {
                 float value = Camera.main.fieldOfView - y * decraseStep;
-                Camera.main.fieldOfView = Mathf.Clamp(value, minSize, maxSize);
+                Camera.main.fieldOfView = Mathf.Clamp(value, minSize, maxSize); // 옆에서 유니티 하는중
             }
         };
     }

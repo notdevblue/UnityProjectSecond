@@ -38,14 +38,13 @@ public class BossSlime : AIBase
 
     protected override bool CanDecide()
     {
-        return base.CanDecide() && !Exhausted;
+        return base.CanDecide() && !Exhausted && GameManager.Instance.OnBossBattle;
     }
 
     public override void OnDamage(int damage)
     {
-        if(CheckExhausted()) SetExhausted();
-
         base.OnDamage(damage);
+        if(CheckExhausted()) SetExhausted();
     }
 
     protected override void Dead(bool DO_NOT_DISABLE = false) // Disable 이 아닌 Destroy 할 것
@@ -59,7 +58,7 @@ public class BossSlime : AIBase
     /// <returns>True when Exhaused</returns>
     private bool CheckExhausted()
     {
-        if(exhaustedHpPercent.Length <= curExhaustedIndex) return false;
+        if(exhaustedHpPercent.Length <= curExhaustedIndex || Exhausted) return false;
 
         return ((float)curHp / (float)maxHp) * 100.0f <= exhaustedHpPercent[curExhaustedIndex];
     }
@@ -88,5 +87,7 @@ public class BossSlime : AIBase
         GameManager.Instance.OnBossBattle = false;
         Destroy(gameObject);
     }
+
+    
 
 }

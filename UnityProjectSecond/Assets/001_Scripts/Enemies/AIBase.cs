@@ -63,7 +63,7 @@ abstract public class AIBase : MonoBehaviour, IDamageable
     /// <returns>True when slime can decide</returns>
     protected virtual bool CanDecide()
     {
-        return decisionActFinished && nextDecisionTime <= Time.time && GameManager.Instance.OnBossBattle;
+        return decisionActFinished && nextDecisionTime <= Time.time;
     }
 
     public virtual void OnDamage(int damage) // 데미지 받았을 시 호출
@@ -106,5 +106,14 @@ abstract public class AIBase : MonoBehaviour, IDamageable
     public void SetActFinished()
     {
         decisionActFinished = true;
+    }
+
+    /// <summary>
+    /// 현재 선택 활동이 끝났는지
+    /// </summary>
+    /// <returns>끝났다면 true</returns>
+    public bool IsActFinished()
+    {
+        return decisionActFinished;
     }
 }
