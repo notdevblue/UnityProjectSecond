@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Animator), typeof(BossSlime))]
 public class BossSlimeAnim : MonoBehaviour
@@ -8,12 +9,17 @@ public class BossSlimeAnim : MonoBehaviour
     // [SerializeField] private float idleTime       = 0.5f;
     // [SerializeField] private float idleTimeRandom = 0.2f;
 
+    [SerializeField] private float pushBackAmount = 0.2f;
+    [SerializeField] private float pushBackDuration = 0.1f;
+
     private BossSlime bossSlime = null;
     private Animator animator   = null;
 
+    private bool isDamagedAnimPlaying = false;
+
     private int attack1Hash   = Animator.StringToHash("Attack1");
     private int attack2Hash   = Animator.StringToHash("Attack2");
-    private int damagedHash   = Animator.StringToHash("Damaged");
+    // private int damagedHash   = Animator.StringToHash("Damaged");
     private int deadHash      = Animator.StringToHash("Dead");
     private int exhaustedHash = Animator.StringToHash("Exhausted");
 
@@ -36,7 +42,8 @@ public class BossSlimeAnim : MonoBehaviour
         }));
 
         bossSlime.OnDamaged += () => { // Damaged
-            animator.SetTrigger(damagedHash);
+            // animator.SetTrigger(damagedHash);
+            PushBack();
         };
 
         bossSlime.OnDead += () => { // Dead
@@ -51,5 +58,20 @@ public class BossSlimeAnim : MonoBehaviour
         bossSlime.OnExhaustedEnd += () => { // Exhausted exit
             animator.SetBool(exhaustedHash, false);
         };
+    }
+
+
+    private void PushBack() // 데미지 에니메이션
+    {
+        if(isDamagedAnimPlaying) return;
+
+        isDamagedAnimPlaying = true;
+
+        Vector2 originPos = transform.position;
+
+        transform.DOMoveX(originPos.x + pushBackAmount, pushBackDuration).SetEase(Ease.Linear).OnComplete(() => {
+            transform.DOMoveX(originPos.x, pushBackDuration).SetEase(Ease.Linear);
+            isDamagedAnimPlaying = false;
+        });
     }
 }
