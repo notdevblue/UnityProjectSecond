@@ -31,26 +31,30 @@ public class BossSlimeAttack : AIAttack
     // 에니메이션 클립에서 실행시킴
     protected void GroundPound() // 함수 이름이 좀 그렇긴 하지만
     {
-        // 낙하 오브젝트 스폰
         StartCoroutine(SpawnFallObjects(Random.Range(fallObjectMinCount, fallObjectMaxCount)));
     }
 
     // 에니메이션 클립에서 실행시킴
     protected void SummonSlime()
     {
-        // 슬라임 생성
+        Vector2[] positions = new Vector2[2];
+
+        // 플레이어 위치에 슬라임이 스폰되면 큰일이 나게 되니,
         if(spawnBeginTrm.position.x < playerTrm.position.x - slimeSpawnDistance) // 공간 확인
         {
-            Random.Range(spawnBeginTrm.position.x, playerTrm.position.x - slimeSpawnDistance);
+            positions[0] = new Vector2(Random.Range(spawnBeginTrm.position.x, playerTrm.position.x - slimeSpawnDistance), spawnBeginTrm.position.y);
         }
         if(spawnEndTrm.position.x > playerTrm.position.x + slimeSpawnDistance) // 공간 확인
         {
-            Random.Range(playerTrm.position.x + slimeSpawnDistance, spawnEndTrm.position.x);
+            positions[1] = new Vector2(Random.Range(playerTrm.position.x + slimeSpawnDistance, spawnEndTrm.position.x), spawnBeginTrm.position.y);
         }
 
-        Vector2 targetPos = new Vector2(Random.Range(spawnBeginTrm.position.x, spawnEndTrm.position.x), spawnBeginTrm.position.y);
+        Vector2 targetPos;
+        if (positions[0] == null)      targetPos = positions[1];
+        else if (positions[1] == null) targetPos = positions[0];
+        else targetPos = positions[(Random.Range(0, 1))];
 
-        SlimePoolManager.Instance.Get();
+        SlimePoolManager.Instance.Get(targetPos);
     }
 
     // 낙하물 생성함

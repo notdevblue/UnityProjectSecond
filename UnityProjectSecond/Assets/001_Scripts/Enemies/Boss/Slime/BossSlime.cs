@@ -61,7 +61,7 @@ public class BossSlime : AIBase
     {
         if(exhaustedHpPercent.Length <= curExhaustedIndex) return false;
 
-        return ((float)curHp / (float)maxHp) <= exhaustedHpPercent[curExhaustedIndex];
+        return ((float)curHp / (float)maxHp) * 100.0f <= exhaustedHpPercent[curExhaustedIndex];
     }
 
     /// <summary>

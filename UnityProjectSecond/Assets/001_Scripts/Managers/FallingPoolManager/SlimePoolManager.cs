@@ -6,7 +6,7 @@ public class SlimePoolManager : MonoSingleton<SlimePoolManager>
     [SerializeField] private GameObject slimePrefab = null;
     [SerializeField] private int slimeInitCount = 10;
 
-    private List<GameObject> pool;
+    private List<GameObject> pool = new List<GameObject>();
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class SlimePoolManager : MonoSingleton<SlimePoolManager>
     /// <summary>
     /// 슬라임을 하나 가져옵니다.
     /// </summary>
-    public GameObject Get(Vector2 pos = default(Vector2))
+    public GameObject Get(Vector2? pos = null)
     {
         GameObject temp = pool.Find(e => !e.activeSelf);
         
@@ -36,9 +36,9 @@ public class SlimePoolManager : MonoSingleton<SlimePoolManager>
             pool.Add(temp);
         }
 
-        if(pos != default(Vector2)) // 위치 지정한 경우
+        if(pos != null) // 위치 지정한 경우
         {
-            temp.transform.position = pos;
+            temp.transform.position = (Vector2)pos;
         }
 
         temp.SetActive(true);

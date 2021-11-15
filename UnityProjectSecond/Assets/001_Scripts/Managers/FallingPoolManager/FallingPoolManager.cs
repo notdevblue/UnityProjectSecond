@@ -37,7 +37,7 @@ public class FallingPoolManager : MonoSingleton<FallingPoolManager>
     /// <param name="pos">생성할 위치</param>
     /// <param name="objIndex">원하는 낙하물 Index</param>
     /// <returns>낙하물 GameObject</returns>
-    public GameObject Get(Vector2 pos = default(Vector2), int objIndex = -1)
+    public GameObject Get(Vector2? pos = null, int objIndex = -1)
     {
         int        index = objIndex == -1 ? Random.Range(0, objList.Length - 1) : objIndex; // 특정한 Object 를 요청한 경우
         GameObject temp  = pool[index].Find(e => !e.activeSelf);
@@ -48,9 +48,9 @@ public class FallingPoolManager : MonoSingleton<FallingPoolManager>
             pool[index].Add(temp);   
         }
 
-        if(pos != default(Vector2)) // 만약 위치를 지정한 경우
+        if(pos != null) // 만약 위치를 지정한 경우
         {
-            temp.transform.position = pos;
+            temp.transform.position = (Vector2)pos;
         }
 
         temp.SetActive(true);
