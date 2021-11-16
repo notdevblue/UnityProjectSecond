@@ -38,9 +38,10 @@ public class GameManager : MonoSingleton<GameManager>
             switch(value)
             {
                 case true: // 배틀 입장
-                    CameraFollowTarget.Instance.SetTarget(bossBattlePos.transform);
+                    CameraFollowTarget.Instance.SetTarget(bossBattlePos.transform); // TODO : OnBossBattleEnter();
                     CameraFollowTarget.Instance.DisableMouseFollow();
                     CameraZoom.Instance.SetFoV(70.0f);
+                    OnBossBattleEnter();
                     break;
 
                 case false: // 배틀 퇴장

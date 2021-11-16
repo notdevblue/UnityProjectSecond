@@ -9,6 +9,7 @@ public class ToScene : MonoBehaviour
     [SerializeField] private string sceneName;
     [SerializeField] CanvasGroup faderCanvas = null;
     [SerializeField] private float fadeDuration = 0.5f;
+    [SerializeField] private float delay = 0.0f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -20,8 +21,16 @@ public class ToScene : MonoBehaviour
 
     public void LoadScene()
     {
-        faderCanvas.DOFade(1.0f, fadeDuration).SetEase(Ease.OutCirc).OnComplete(() => {
-            if(PlayerStats.Instance != null)
+        StartCoroutine(Load());
+    }
+
+    IEnumerator Load()
+    {
+        yield return new WaitForSeconds(delay);
+
+        faderCanvas.DOFade(1.0f, fadeDuration).SetEase(Ease.OutCirc).OnComplete(() =>
+        {
+            if (PlayerStats.Instance != null)
                 PlayerStatus.Instance.moveable = false;
 
             SceneManager.LoadScene(sceneName);

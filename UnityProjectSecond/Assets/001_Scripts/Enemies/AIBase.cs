@@ -11,6 +11,7 @@ abstract public class AIBase : MonoBehaviour, IDamageable
 {
 
     public event Action OnDamaged; // 데미지 받았을 시 호출
+    public event Action<int, int> OnDamagedWithHP; // 데미지 받았을 시 maxHP, curHP 같이 보내서 호출
     public event Action OnDead; // 사망 시 호출
 
     [SerializeField] protected int maxHp = 20;
@@ -35,8 +36,9 @@ abstract public class AIBase : MonoBehaviour, IDamageable
 
         curHp = maxHp;
 
+        OnDamagedWithHP += (x, y) => { };
         OnDamaged += () => { };
-        OnDead    += () => { };
+        OnDead += () => { };
 
         nextDecisionTime = Time.time;
     }
@@ -70,6 +72,7 @@ abstract public class AIBase : MonoBehaviour, IDamageable
     {
         curHp -= damage;
         OnDamaged();
+        OnDamagedWithHP(maxHp, curHp);
         if(curHp <= 0)
             Dead();
     }
@@ -117,3 +120,5 @@ abstract public class AIBase : MonoBehaviour, IDamageable
         return decisionActFinished;
     }
 }
+
+// 여기는 지금 밤 12시까지 마감 러쉬중임
