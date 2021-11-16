@@ -17,6 +17,7 @@ public class Dialog : MonoBehaviour
 
     private void Awake()
     {
+        // 여기에 callback 을 추가할 수는 없으니 자식 오브젝트에서 가져옴
         callback = GetComponentInChildren<IDialogCallback>();
     }
 

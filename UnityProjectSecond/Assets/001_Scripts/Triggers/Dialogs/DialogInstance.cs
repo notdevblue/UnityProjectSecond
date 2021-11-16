@@ -69,7 +69,8 @@ public class DialogInstance : MonoSingleton<DialogInstance>
         }
 
         // Callback 저장
-        _callback = callback;
+        if(_callback == null)
+            _callback = callback;
 
         // 이미지와 텍스트 설정
         this.text.text   = text;

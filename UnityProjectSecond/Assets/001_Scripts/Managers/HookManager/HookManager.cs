@@ -110,10 +110,7 @@ public class HookManager : MonoSingleton<HookManager>
                 minDistance = tempDist;
             }
         }
-
-        Debug.Log(minDistanceIdx);
-        Debug.Log(minDistance);
-
+        
         if(minDistanceIdx != -1) hookList[minDistanceIdx].Selected();
     }
 
