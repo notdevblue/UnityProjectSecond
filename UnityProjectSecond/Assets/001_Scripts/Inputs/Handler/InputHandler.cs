@@ -53,6 +53,11 @@ public class InputHandler : MonoSingleton<InputHandler>
     /// </summary>
     public event Action<float> OnMouseWheel;
 
+    /// <summary>
+    /// 자동 훅 연결 입력 시 호출됨
+    /// </summary>
+    public event Action OnAutoHook;
+
     private void Awake()
     {
 
@@ -64,6 +69,7 @@ public class InputHandler : MonoSingleton<InputHandler>
         OnKeyAttack  += ()  => { };
         OnKeyTime    += ()  => { };
         OnMouseWheel += (y) => { };
+        OnAutoHook   += ()  => { };
     }
 
     private void Start()
@@ -100,19 +106,13 @@ public class InputHandler : MonoSingleton<InputHandler>
             }
 
         }
-
-        if (PlayerStatus.Instance.attackable)
-        {
             // Attack
-            if (Input.GetKeyDown(input.atk))
-            {
-                OnKeyAttack();
-            }
-            if (Input.GetMouseButtonDown((int)input.atkMouse))
-            {
-                OnKeyAttack();
-            }
+        if (PlayerStatus.Instance.attackable &&
+           (Input.GetKeyDown(input.atk) || Input.GetMouseButtonDown((int)input.atkMouse)))
+        {
+            OnKeyAttack();
         }
+        
 
         // Time
         if(Input.GetKeyDown(input.timeSwitch))
@@ -122,6 +122,14 @@ public class InputHandler : MonoSingleton<InputHandler>
 
         // Mouse Wheel Input
         OnMouseWheel(Input.mouseScrollDelta.y);
+
+        // Auto Hook
+        if (PlayerStatus.Instance.autoHookAble &&
+           (Input.GetKeyDown(input.autoHook) || Input.GetMouseButtonDown((int)input.autoHookMouse)))
+        {
+            OnAutoHook();
+        }
+
 
         // idle
         if(!Input.anyKey)

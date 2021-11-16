@@ -17,7 +17,7 @@ public class PlayerHookMovement : MonoBehaviour
     private void Start()
     {
 
-        InputHandler.Instance.OnKeyLeft += () => {
+        InputHandler.Instance.OnKeyLeft += () => { // 훅 왼쪽 스윙
             if (PlayerStatus.Instance.moveable && PlayerStatus.Instance.onHook)
             {
                 rigid.AddForce(Vector2.left * PlayerStats.Instance.swingForce * Time.deltaTime, ForceMode2D.Impulse);
@@ -25,7 +25,7 @@ public class PlayerHookMovement : MonoBehaviour
             }
         };
 
-        InputHandler.Instance.OnKeyRight += () => {
+        InputHandler.Instance.OnKeyRight += () => { // 훅 오른쪽 스윙
             if (PlayerStatus.Instance.moveable && PlayerStatus.Instance.onHook)
             {
                 rigid.AddForce(Vector2.right * PlayerStats.Instance.swingForce * Time.deltaTime, ForceMode2D.Impulse);
@@ -33,11 +33,11 @@ public class PlayerHookMovement : MonoBehaviour
             }
         };
 
-        InputHandler.Instance.OnKeyJump += () => {
+        InputHandler.Instance.OnKeyJump += () => { // 훅 탈출
             HookManager.Instance.ResetConnectedHinge();
         };
 
-        InputHandler.Instance.OnKeyUp += () => {
+        InputHandler.Instance.OnKeyUp += () => { // 훅 길이 --
             if(PlayerStatus.Instance.onHook)
             {
                 float yLength = HookManager.Instance.CurHookedHinge.transform.position.y - transform.position.y;
@@ -50,7 +50,7 @@ public class PlayerHookMovement : MonoBehaviour
             }
         };
 
-        InputHandler.Instance.OnKeyDown += () => {
+        InputHandler.Instance.OnKeyDown += () => { // 훅 길이 ++
             if (PlayerStatus.Instance.onHook)
             {
                 float yLength = HookManager.Instance.CurHookedHinge.transform.position.y - transform.position.y;
@@ -60,6 +60,10 @@ public class PlayerHookMovement : MonoBehaviour
                     transform.position -= transform.up * PlayerStats.Instance.vSpeed * Time.deltaTime;
                 }
             }
+        };
+
+        InputHandler.Instance.OnAutoHook += () => { // 자동 훅
+            HookManager.Instance.HookToNearestPosition();
         };
 
 

@@ -20,6 +20,8 @@ public class Hook : Selectable
         hookPositionHinge = GetComponentInChildren<HingeJoint2D>();
         layer             = LayerMask.GetMask("PLAYER");
         layer            += LayerMask.GetMask("GROUND");
+
+        HookManager.Instance.AddToAutoHookAvalibleList(this); // 자동 훅 가능 리스트에 추가
     }
 
     public override void DeFocus()
@@ -37,60 +39,33 @@ public class Hook : Selectable
         return transform.position;
     }
 
-    // public override void Selected()
-    // {
-    //     // 사이에 가리는 것이 없는지 확인
-    //     RaycastHit2D ray = Physics2D.Raycast(transform.position, playerTrm.position - transform.position, 10.0f, layer);
-
-    //     if(ray.collider != null)
-    //     {
-    //         if(ray.collider.CompareTag(PLAYER))
-    //         {
-    //             // 위치로 이동
-    //             Vector3 targetPos   = transform.position;
-    //                     targetPos.z = playerTrm.position.z; // z 값 고정
-    //             playerTrm.position  = targetPos;
-
-    //             // 위치에 고정
-    //             PhysicsManager.Instance.SetGravity(playerRigid, 0.0f);
-    //             PhysicsManager.Instance.SetVelocity(playerRigid, Vector2.zero);
-                
-    //             // 상태 저장
-    //             PlayerStatus.Instance.onHook = true;
-
-    //             //점프 상태 초기회
-    //             PlayerStatus.Instance.ResetJumpStatus();
-    //         }
-    //     }
-    // }
-
     public override void Selected()
+    {
+        if(!CanConnect()) return; // TODO : 야매. 나중에 더 좋은 방법으로 고쳐야 함
+
+        if(HookManager.Instance.CurHookedHinge != null)
+        {
+            // 연결 해제 후 연결
+            HookManager.Instance.ResetConnectedHinge();
+        }
+
+        // 연결
+        playerTrm.SetParent(this.transform); // y 움직임 때문에
+        hookPositionHinge.connectedBody = HookManager.Instance.PlayerHingeRigid;
+
+        // 상태 저장
+        PlayerStatus.Instance.onHook = true;
+        HookManager.Instance.CurHookedHinge = hookPositionHinge;
+
+        //점프 상태 초기회
+        PlayerStatus.Instance.ResetJumpStatus();
+    }
+
+    public bool CanConnect()
     {
         // 사이에 가리는 것이 없는지 확인
         RaycastHit2D ray = Physics2D.Raycast(transform.position, playerTrm.position - transform.position, 10.0f, layer);
 
-        if(ray.collider != null)
-        {
-            if(ray.collider.CompareTag(PLAYER) && HookManager.Instance.CanHook(transform.position))
-            {
-                if(HookManager.Instance.CurHookedHinge != null)
-                {
-                    // 연결 해제 후 연결
-                    HookManager.Instance.ResetConnectedHinge();
-
-                }
-
-                // 연결
-                playerTrm.SetParent(this.transform); // y 움직임 때문에
-                hookPositionHinge.connectedBody = HookManager.Instance.PlayerHingeRigid;
-
-                // 상태 저장
-                PlayerStatus.Instance.onHook = true;
-                HookManager.Instance.CurHookedHinge = hookPositionHinge;
-
-                //점프 상태 초기회
-                PlayerStatus.Instance.ResetJumpStatus();
-            }
-        }
+        return ray.collider != null && ray.collider.CompareTag(PLAYER) && HookManager.Instance.CanHook(transform.position);
     }
 }

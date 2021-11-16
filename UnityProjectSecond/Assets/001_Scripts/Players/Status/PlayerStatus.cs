@@ -14,10 +14,11 @@ public class PlayerStatus : MonoSingleton<PlayerStatus>
     public bool onHook   = false;
     public bool attacked = false;
 
-    public bool moveable   = true;
-    public bool jumpable   = true;
-    public bool attackable = true;
-    public bool dashable   = true;
+    public bool moveable     = true;
+    public bool jumpable     = true;
+    public bool attackable   = true;
+    public bool dashable     = true;
+    public bool autoHookAble = false;
 
     public int maxHp = 20;
     public int hp    = 20;
