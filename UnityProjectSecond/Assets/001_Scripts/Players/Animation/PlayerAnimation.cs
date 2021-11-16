@@ -61,6 +61,7 @@ public class PlayerAnimation : MonoBehaviour
 
         health.onDeath += () => {
             animator.SetTrigger(deadHash);
+            Invoke(nameof(LoadScene), 1.0f);
         };
 
         // Idle
@@ -69,4 +70,9 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetBool(runHash, false);
         };
     } // start(); end
+
+    private void LoadScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
 }
