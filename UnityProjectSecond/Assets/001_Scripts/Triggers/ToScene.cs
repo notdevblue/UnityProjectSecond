@@ -18,10 +18,12 @@ public class ToScene : MonoBehaviour
         }
     }
 
-    private void LoadScene()
+    public void LoadScene()
     {
-        faderCanvas.DOFade(1.0f, fadeDuration).SetEase(Ease.OutCirc).OnComplete(() =>{
-            PlayerStatus.Instance.moveable = false;
+        faderCanvas.DOFade(1.0f, fadeDuration).SetEase(Ease.OutCirc).OnComplete(() => {
+            if(PlayerStats.Instance != null)
+                PlayerStatus.Instance.moveable = false;
+
             SceneManager.LoadScene(sceneName);
         });
     }
