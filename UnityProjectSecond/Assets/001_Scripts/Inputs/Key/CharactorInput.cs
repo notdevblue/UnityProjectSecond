@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+// 키 매핑용
+
 public enum MouseInput
 {
     Left = 0,

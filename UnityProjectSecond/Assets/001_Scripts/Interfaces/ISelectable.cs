@@ -6,7 +6,7 @@ abstract public class Selectable : MonoBehaviour
     abstract public void Focus();
     abstract public void DeFocus();
 
-    public void SetSelectIconTransform(Transform icon)
+    public void SetSelectIconTransform(Transform icon) // 선택 아이콘 위치 변경용
     {
         icon.SetParent(this.transform);
         icon.localPosition = Vector3.up;

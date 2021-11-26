@@ -22,7 +22,7 @@ public class SlimeAttack : AIAttack
             normal.x = -other.GetContact(0).normal.x;
             normal.y = upPushForce;
 
-            other.transform.GetComponent<IPushable>()?.Push(normal, damage);
+            other.transform.GetComponent<IPushable>()?.Push(normal, damage); // other 를 튕겨냄
             other.transform.GetComponent<IDamageable>()?.OnDamage(damage);
         }
     }

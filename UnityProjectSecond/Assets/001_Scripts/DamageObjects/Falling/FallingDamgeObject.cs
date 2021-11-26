@@ -8,7 +8,7 @@ public class FallingDamgeObject : MonoBehaviour
 {
     [SerializeField] private int damage = 5;
 
-    private ParticleSystem particle = null;
+    private ParticleSystem particle = null; // TODO : 적용
 
     private void Awake()
     {

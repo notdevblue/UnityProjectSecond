@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
             if(hit.collider != null)
             {
                 hit.transform.GetComponent<IDamageable>()?.OnDamage(PlayerStats.Instance.atkDamage);
-                hit.transform.GetComponent<IPushable>()?.Push(-hit.normal + Vector2.up, pushForce); // TODO : 미리 계산 해 두고 저장
+                hit.transform.GetComponent<IPushable>()?.Push(-hit.normal + Vector2.up, pushForce); // TODO : 미리 계산 해 두고 저장?
             }
 
         };

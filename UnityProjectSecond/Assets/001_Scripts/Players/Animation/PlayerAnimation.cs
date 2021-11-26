@@ -16,7 +16,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private float lastAtktime = float.MinValue;
 
-    private Vector3 flip = new Vector3(-1.0f, 1.0f, 1.0f);
+    private Vector3 flip = new Vector3(-1.0f, 1.0f, 1.0f); // 왼쪽 보는 상태
 
     private void Awake()
     {

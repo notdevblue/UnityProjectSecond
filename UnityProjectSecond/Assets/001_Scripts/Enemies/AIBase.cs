@@ -9,15 +9,23 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 abstract public class AIBase : MonoBehaviour, IDamageable
 {
-
-    public event Action OnDamaged; // 데미지 받았을 시 호출
-    public event Action<int, int> OnDamagedWithHP; // 데미지 받았을 시 maxHP, curHP 같이 보내서 호출
-    public event Action OnDead; // 사망 시 호출
+    ///<summary>
+    /// 데미지 입었을 시 호출
+    ///</summary>
+    public event Action OnDamaged;
+    ///<summary>
+    /// 데미지 받았을 시 maxHP, curHP 같이 보내서 호출
+    ///</summary>
+    public event Action<int, int> OnDamagedWithHP;
+    ///<summary>
+    /// 사망 시 호출
+    ///</summary>
+    public event Action OnDead;
 
     [SerializeField] protected int maxHp = 20;
     [SerializeField] private float DEATH_ANIM_TIME = 0.5f; // 사망 에니메이션 끝난 후 Disable 위해
-    [SerializeField] private float decisionDelayTime = 2.0f;
-    [SerializeField] private float decisionDelayRandomTime = 0.5f;
+    [SerializeField] private float decisionDelayTime = 2.0f; // 다음 선택까지의 시간
+    [SerializeField] private float decisionDelayRandomTime = 0.5f; // 다음 선택까지의 랜덤 시간
 
     protected Rigidbody2D rigid;
     protected int curHp; // curHp = maxHp
@@ -48,13 +56,13 @@ abstract public class AIBase : MonoBehaviour, IDamageable
         // 다음 행동 선택
         if (CanDecide())
         {
-            nextDecisionTime = Time.time + UnityEngine.Random.Range(decisionDelayTime - decisionDelayRandomTime, decisionDelayTime + decisionDelayRandomTime);
+            nextDecisionTime = Time.time + UnityEngine.Random.Range(decisionDelayTime - decisionDelayRandomTime, decisionDelayTime + decisionDelayRandomTime); // 다음 행동 시간
 
             for (int i = 0; i < decisionList.Count; ++i)
             {
                 int decision = UnityEngine.Random.Range(0, decisionList.Count);
 
-                decisionList[decision].what();
+                decisionList[decision].what(); // 행동
             }
         }
     }
@@ -120,5 +128,3 @@ abstract public class AIBase : MonoBehaviour, IDamageable
         return decisionActFinished;
     }
 }
-
-// 여기는 지금 밤 12시까지 마감 러쉬중임

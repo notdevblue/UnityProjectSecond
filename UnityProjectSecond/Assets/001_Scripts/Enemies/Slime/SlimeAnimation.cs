@@ -21,7 +21,7 @@ public class SlimeAnimation : MonoBehaviour
     {
         slime.OnDamaged += () => {
             animator.SetTrigger(attackedHash);
-            slime.SetActFinished();
+            slime.SetActFinished(); // 행동을 진행 중이었을수도 있으니
         };
 
         slime.OnDead += () => {

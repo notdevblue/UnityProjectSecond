@@ -6,7 +6,7 @@ using UnityEngine;
 public class SelectManager : MonoBehaviour
 {
     [SerializeField] private GameObject  cursor         = null;
-    [SerializeField] private GameObject  selectIcon     = null;     // 선택 아이콘
+    [SerializeField] private GameObject  selectIcon     = null; // 선택 아이콘
                      private Selectable  selectedObject = null; // 선택된 오브젝트
 
     const string SELECTABLE = "SELECTABLE";
@@ -21,7 +21,7 @@ public class SelectManager : MonoBehaviour
         };
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() // 마우스 위치에 작은 collider
     {
         // Debug.Log(Input.mousePosition);
 
@@ -42,7 +42,7 @@ public class SelectManager : MonoBehaviour
             {
                 selectedObject.Focus();
                 selectIcon.SetActive(true);
-                selectedObject.SetSelectIconTransform(selectIcon.transform);
+                selectedObject.SetSelectIconTransform(selectIcon.transform); // 선택 활성화
             }
             
         }
@@ -50,7 +50,7 @@ public class SelectManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.transform.CompareTag(SELECTABLE))
+        if (other.transform.CompareTag(SELECTABLE)) // 선택 비활성화
         {
             selectedObject?.DeFocus();
             selectedObject = null;

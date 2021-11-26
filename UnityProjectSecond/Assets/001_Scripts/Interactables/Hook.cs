@@ -41,7 +41,7 @@ public class Hook : Selectable
 
     public override void Selected()
     {
-        if(!CanConnect()) return; // TODO : 야매. 나중에 더 좋은 방법으로 고쳐야 함
+        if(!CanConnect()) return; // TODO : 나중에 더 좋은 방법으로 고쳐야 함
 
         if(HookManager.Instance.CurHookedHinge != null)
         {

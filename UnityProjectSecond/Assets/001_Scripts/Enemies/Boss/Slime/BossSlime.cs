@@ -13,13 +13,10 @@ public class BossSlime : AIBase
     /// </summary>
     public System.Action OnExhaustedEnd;
 
-    public bool Exhausted { get; private set; }
-
-    public float[] exhaustedHpPercent = new float[0]; // 탈진 상태가 될 HP 비율
-
-    [SerializeField] private float exhausedTime = 15.0f;
-
-    private int curExhaustedIndex = 0;
+    public bool Exhausted { get; private set; } // 탈진 상태
+    public float[] exhaustedHpPercent = new float[0]; // 탈진 상태가 될 HP 비율 배열
+    [SerializeField] private float exhausedTime = 15.0f; // 탈진 시간
+    private int curExhaustedIndex = 0; // 현재 탈진 index
 
 
 

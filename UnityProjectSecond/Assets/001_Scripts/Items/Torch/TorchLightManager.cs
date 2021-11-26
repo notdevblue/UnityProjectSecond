@@ -27,7 +27,7 @@ public class TorchLightManager : MonoBehaviour
 
     private void Update()
     {
-        if(flickedTime + flickerDelay < Time.time)
+        if(flickedTime + flickerDelay < Time.time) // 불 깜빡임 설정
         {
             flickedTime = Time.time;
             targetIntensity = Random.Range(defaultLightIntensity - lightFlickerRange, defaultLightIntensity + lightFlickerRange);

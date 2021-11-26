@@ -9,24 +9,24 @@ public class BossSlimeAnim : MonoBehaviour
     // [SerializeField] private float idleTime       = 0.5f;
     // [SerializeField] private float idleTimeRandom = 0.2f;
 
+    // 데미지 에니메니션 용
     [SerializeField] private float pushBackAmount = 0.2f;
     [SerializeField] private float pushBackDuration = 0.1f;
 
-    private BossSlime bossSlime = null;
+    private BossSlime bossSlime = null; // 슬라임 보스 스크립트
     private Animator animator   = null;
 
-    private bool isDamagedAnimPlaying = false;
-    private bool isExhausted = false;
+    private bool isExhausted = false; // 탈진 상태 여부
 
     private Vector2 originPos;
 
+#region Hash
     private int attack1Hash   = Animator.StringToHash("Attack1");
     private int attack2Hash   = Animator.StringToHash("Attack2");
     private int damagedHash   = Animator.StringToHash("Damaged");
     private int deadHash      = Animator.StringToHash("Dead");
     private int exhaustedHash = Animator.StringToHash("Exhausted");
-
-
+#endregion //Hash
 
     private void Start()
     {

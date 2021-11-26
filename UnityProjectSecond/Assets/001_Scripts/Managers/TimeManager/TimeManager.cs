@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 사용 안하는 코드
+
 public class TimeManager : MonoBehaviour
 {
     public GameObject[] stages = new GameObject[2]; // 일단 두개

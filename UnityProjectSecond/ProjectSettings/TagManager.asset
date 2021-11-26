@@ -67,6 +67,9 @@ TagManager:
   - name: PLAYER
     uniqueID: 385356527
     locked: 0
+  - name: FRONTLAYER
+    uniqueID: 3918260183
+    locked: 0
   - name: UI
     uniqueID: 2411362509
     locked: 0

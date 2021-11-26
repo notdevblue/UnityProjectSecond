@@ -22,8 +22,6 @@ public class PlayerMovement : MonoBehaviour, IPushable
             {
                 Vector2 speed = Vector2.left * PlayerStats.Instance.speed * Time.deltaTime;
 
-                // if (!PlayerStatus.Instance.onGround) // 훅 이동 때문에
-                //     rigid.AddForce(speed, ForceMode2D.Impulse);
                 transform.position += (Vector3)speed;
 
                 PlayerStatus.Instance.isMoving = true;
@@ -35,8 +33,6 @@ public class PlayerMovement : MonoBehaviour, IPushable
             {
                 Vector2 speed = Vector2.right * PlayerStats.Instance.speed * Time.deltaTime;
 
-                // if(!PlayerStatus.Instance.onGround) // 훅 이동 때문에
-                //     rigid.AddForce(speed, ForceMode2D.Impulse);
                 transform.position += (Vector3)speed;
 
                 PlayerStatus.Instance.isMoving = true;

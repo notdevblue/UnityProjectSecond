@@ -14,10 +14,10 @@ abstract public class AIMove : MonoBehaviour
 
     // 순찰 위치
     [SerializeField] private Transform partolPosBegin;
-    [SerializeField] private Transform patrolPosEdgeBegin;
+    [SerializeField] private Transform patrolPosEdgeBegin; // 끝에 다가갔다고 생각하는 거리
 
     [SerializeField] private Transform patrolPosEnd;
-    [SerializeField] private Transform patrolPosEdgeEnd;
+    [SerializeField] private Transform patrolPosEdgeEnd; // 끝에 다가갔다고 생각하는 거리
 
     protected Rigidbody2D rigid;
 
@@ -71,6 +71,7 @@ abstract public class AIMove : MonoBehaviour
     {
         float decideRightWeight;
 
+        #region 행동 가중치
         if (partolPosBegin.position.x > transform.position.x)
         {
             // force right;
@@ -96,6 +97,7 @@ abstract public class AIMove : MonoBehaviour
             // equal;
             decideRightWeight = HALF;
         }
+        #endregion 행동 가중치
 
         float x = Random.Range(0.0f, 1.0f);
 

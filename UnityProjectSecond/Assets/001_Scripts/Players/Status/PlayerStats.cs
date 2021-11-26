@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 플레이어 스텟
 public class PlayerStats : MonoSingleton<PlayerStats>
 {
     // 공격
@@ -15,9 +16,6 @@ public class PlayerStats : MonoSingleton<PlayerStats>
     public float jumpForce = 10.0f; // 점프 힘
     public float swingForce = 5.0f; // 훅 스윙 힘
 
-    public float damageFreezeTime = 0.3f;
-
-
-
+    public float damageFreezeTime = 0.3f; // 피격 시 입력 무시 길이
 
 }

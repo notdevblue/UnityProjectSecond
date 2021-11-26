@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 플레이어 상태
 public class PlayerStatus : MonoSingleton<PlayerStatus>
 {
     public bool isMoving        = false;
@@ -25,13 +26,13 @@ public class PlayerStatus : MonoSingleton<PlayerStatus>
 
     private void Start()
     {
-        GetComponent<PlayerHealth>().onDamage += () => {
+        GetComponent<PlayerHealth>().onDamage += () => { // 데미지 시 상태 설정
             moveable = false;
             attackable = false;
             Invoke(nameof(AbleInput), PlayerStats.Instance.damageFreezeTime);
         };
 
-        GetComponent<PlayerHealth>().onDeath += () => {
+        GetComponent<PlayerHealth>().onDeath += () => { // 사망 시 상태 설정
             CancelInvoke();
             moveable = false;
             attackable = false;

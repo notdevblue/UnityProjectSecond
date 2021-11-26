@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class CameraZoom : MonoSingleton<CameraZoom>
 {
-    [SerializeField] float minSize = 30.0f;
-    [SerializeField] float defaultSize = 50.0f;
-    [SerializeField] float maxSize = 70.0f;
+    [SerializeField] float minSize = 30.0f; // 최소 FoV
+    [SerializeField] float defaultSize = 50.0f; // 기본 FoV
+    [SerializeField] float maxSize = 70.0f; // 최대 FoV
 
-    [SerializeField] float decraseStep = 0.5f;
+    [SerializeField] float decraseStep = 0.5f; // 카메라 FoV
 
-    public bool CanZoom { get; set; }
+    public bool CanZoom { get; set; } // 줌 상태
 
     void Start()
     {
         CanZoom = true;
 
-        InputHandler.Instance.OnMouseWheel += y => {
+        InputHandler.Instance.OnMouseWheel += y => { // 휠 입력 따라 시아 조절
             if (CanZoom)
             {
                 float value = Camera.main.fieldOfView - y * decraseStep;
-                Camera.main.fieldOfView = Mathf.Clamp(value, minSize, maxSize); // 옆에서 유니티 하는중
+                Camera.main.fieldOfView = Mathf.Clamp(value, minSize, maxSize);
             }
         };
     }

@@ -28,7 +28,7 @@ public class ToScene : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        faderCanvas.DOFade(1.0f, fadeDuration).SetEase(Ease.OutCirc).OnComplete(() =>
+        faderCanvas.DOFade(1.0f, fadeDuration).SetEase(Ease.OutCirc).OnComplete(() => // 까만색으로 가려서 자연스럽게
         {
             if (PlayerStats.Instance != null)
                 PlayerStatus.Instance.moveable = false;

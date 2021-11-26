@@ -58,6 +58,7 @@ public class HookManager : MonoSingleton<HookManager>
         if(hookLine.activeSelf)
         {
             // 플레이어 기준으로 작성한 코드.
+            // 줄 길이와 각도 설정
             hookLine.transform.position    = player.transform.position + (CurHookedHinge.transform.position - player.transform.position) / 2.0f;
             hookLine.transform.localScale  = new Vector2(0.1f, Vector2.Distance(CurHookedHinge.transform.position, player.transform.position));
             hookLine.transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan2(player.transform.position.y - CurHookedHinge.transform.position.y,
